@@ -19,6 +19,8 @@ namespace BingPaper
         private string file = string.Empty;
         private int file_index = 0;
         private List<Files> files;
+        bool mouseDown = false;
+        Point lastLocation;
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
@@ -30,9 +32,41 @@ namespace BingPaper
             files = new List<Files>();
 
             CheckImagePath();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             Logger.WriteLog("Looking for new wallpaper");
 
             DownloadJSON();
+
+            var pos = this.PointToScreen(btnSetWall.Location);
+            pos = pctBoxWall.PointToClient(pos);
+            btnSetWall.Parent = pctBoxWall;
+            btnSetWall.Location = pos;
+            btnSetWall.BackColor = Color.Transparent;
+        }
+
+        private void Interface_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void Interface_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                Location = new Point(
+                    (Location.X - lastLocation.X) + e.X, (Location.Y - lastLocation.Y) + e.Y);
+
+                Update();
+            }
+        }
+
+        private void Interface_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
         }
 
         private void DownloadJSON()
@@ -105,6 +139,16 @@ namespace BingPaper
             }
         }
 
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         private void btnRight_Click(object sender, EventArgs e)
         {
             //int index = fileBitmaps.IndexOf((Bitmap)pctBoxWall.Image);
@@ -131,7 +175,6 @@ namespace BingPaper
                 file_index = index - 1;
                 pctBoxWall.Image = files[file_index].bitmap;
                 lblName.Text = files[file_index].name;
-  
             }
             else
             {
