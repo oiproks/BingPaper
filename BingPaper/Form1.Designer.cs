@@ -32,10 +32,10 @@
             this.pctBoxWall = new System.Windows.Forms.PictureBox();
             this.btnSetWall = new System.Windows.Forms.Button();
             this.lblName = new System.Windows.Forms.Label();
-            this.rightArrow1 = new BingPaper.ArrowRight();
-            this.leftArrow1 = new BingPaper.ArrowLeft();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnMin = new System.Windows.Forms.Button();
+            this.rightArrow1 = new BingPaper.ArrowRight();
+            this.leftArrow1 = new BingPaper.ArrowLeft();
             ((System.ComponentModel.ISupportInitialize)(this.pctBoxWall)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,30 +79,6 @@
             this.lblName.Size = new System.Drawing.Size(0, 13);
             this.lblName.TabIndex = 4;
             // 
-            // rightArrow1
-            // 
-            this.rightArrow1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.rightArrow1.FlatAppearance.BorderSize = 0;
-            this.rightArrow1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rightArrow1.Location = new System.Drawing.Point(920, 270);
-            this.rightArrow1.Name = "rightArrow1";
-            this.rightArrow1.Size = new System.Drawing.Size(30, 40);
-            this.rightArrow1.TabIndex = 3;
-            this.rightArrow1.UseVisualStyleBackColor = false;
-            this.rightArrow1.Click += new System.EventHandler(this.btnRight_Click);
-            // 
-            // leftArrow1
-            // 
-            this.leftArrow1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.leftArrow1.FlatAppearance.BorderSize = 0;
-            this.leftArrow1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftArrow1.Location = new System.Drawing.Point(10, 270);
-            this.leftArrow1.Name = "leftArrow1";
-            this.leftArrow1.Size = new System.Drawing.Size(30, 40);
-            this.leftArrow1.TabIndex = 2;
-            this.leftArrow1.UseVisualStyleBackColor = false;
-            this.leftArrow1.Click += new System.EventHandler(this.btnLeft_Click);
-            // 
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.Red;
@@ -135,6 +111,30 @@
             this.btnMin.UseVisualStyleBackColor = false;
             this.btnMin.Click += new System.EventHandler(this.btnMin_Click);
             // 
+            // rightArrow1
+            // 
+            this.rightArrow1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.rightArrow1.FlatAppearance.BorderSize = 0;
+            this.rightArrow1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rightArrow1.Location = new System.Drawing.Point(920, 270);
+            this.rightArrow1.Name = "rightArrow1";
+            this.rightArrow1.Size = new System.Drawing.Size(30, 40);
+            this.rightArrow1.TabIndex = 3;
+            this.rightArrow1.UseVisualStyleBackColor = false;
+            this.rightArrow1.Click += new System.EventHandler(this.btnRight_Click);
+            // 
+            // leftArrow1
+            // 
+            this.leftArrow1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.leftArrow1.FlatAppearance.BorderSize = 0;
+            this.leftArrow1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftArrow1.Location = new System.Drawing.Point(10, 270);
+            this.leftArrow1.Name = "leftArrow1";
+            this.leftArrow1.Size = new System.Drawing.Size(30, 40);
+            this.leftArrow1.TabIndex = 2;
+            this.leftArrow1.UseVisualStyleBackColor = false;
+            this.leftArrow1.Click += new System.EventHandler(this.btnLeft_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -150,6 +150,7 @@
             this.Controls.Add(this.pctBoxWall);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BingPaper";
