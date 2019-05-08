@@ -21,6 +21,8 @@ namespace BingPaper
         private List<Files> files;
         bool mouseDown = false;
         Point lastLocation;
+        Bitmap[] wallList;
+        List<CheckBox> selecters = new List<CheckBox>();
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
@@ -36,6 +38,8 @@ namespace BingPaper
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            wallList = new Bitmap[Screen.AllScreens.Count()];
+
             Logger.WriteLog("Looking for new wallpaper");
 
             DownloadJSON();
@@ -105,6 +109,7 @@ namespace BingPaper
             finally
             {
                 files = files.OrderByDescending(o => o.date).ToList();
+                createShowNextCheck(file_index);
             }
         }
 
@@ -122,11 +127,78 @@ namespace BingPaper
 
         private void btnSetWall_Click(object sender, EventArgs e)
         {
+            Bitmap bitmap;
             CheckImagePath();
-            Bitmap bitmap = (Bitmap)pctBoxWall.Image;
-            bitmap.Save(file, ImageFormat.Bmp);
+            if (wallList.Count(x => x != null) == wallList.Length)
+            {
+                //TODO create image file with bitmaps in wallList
+                bitmap = CreateMultiScreenWall();
+                file = file.Insert(file.IndexOf(".bmp"), "_multi");
+                bitmap.Save(file, ImageFormat.Bmp);
+                SystemParametersInfo(20, 0, file, 0x01 | 0x02);
+            }
+            else
+            {
+                bitmap = (Bitmap)pctBoxWall.Image;
+                bitmap.Save(file, ImageFormat.Bmp);
+                SystemParametersInfo(0x0014, 0, file, 0x01 | 0x02);
+            }
+            foreach (CheckBox checker in selecters)
+            {
+                checker.CheckedChanged -= addWallToList;
+                checker.Checked = false;
+                checker.CheckedChanged += addWallToList;
+            }
+            Array.Clear(wallList, 0, wallList.Length);
+        }
 
-            SystemParametersInfo(0x0014, 0, file, 0x01 | 0x02);
+        private Bitmap CreateMultiScreenWall()
+        {
+            //TODO: Use screen resolution and position to resize and locate the wallpapers
+            //foreach (var screen in Screen.AllScreens)
+            //{
+            //    Console.WriteLine("Device Name: " + screen.DeviceName);
+            //    Console.WriteLine("Bounds: " + screen.Bounds.ToString());
+            //    Console.WriteLine("Type: " + screen.GetType().ToString());
+            //    Console.WriteLine("Working Area: " + screen.WorkingArea.ToString());
+            //    Console.WriteLine("Primary Screen: " + screen.Primary.ToString());
+            //}
+
+            Bitmap finalImage = null;
+            try
+            {
+                int width = 0;
+                int height = 0;
+                foreach (Bitmap wall in wallList)
+                {
+                    width += wall.Width;
+                    height = wall.Height > height ? wall.Height : height;
+                }
+
+                finalImage = new Bitmap(width, height);
+
+                using (Graphics g = Graphics.FromImage(finalImage))
+                {
+                    //set background color
+                    g.Clear(Color.Black);
+
+                    //go through each image and draw it on the final image
+                    int offset = 0;
+                    foreach (Bitmap image in wallList)
+                    {
+                        g.DrawImage(image,
+                          new Rectangle(offset, 0, image.Width, image.Height));
+                        offset += image.Width;
+                    }
+                }
+                return finalImage;
+            }
+            catch (Exception ex)
+            {
+                if (finalImage != null)
+                    finalImage.Dispose();
+                throw ex;
+            }
         }
 
         private void CheckImagePath()
@@ -153,6 +225,7 @@ namespace BingPaper
         {
             //int index = fileBitmaps.IndexOf((Bitmap)pctBoxWall.Image);
             int index = files.FindIndex(f => f.bitmap == (Bitmap)pctBoxWall.Image);
+            hidePrevCheck(index);
             if (index < files.Count - 1)
             {
                 file_index = index + 1;
@@ -165,11 +238,13 @@ namespace BingPaper
                 lblName.Text = files[0].name;
                 file_index = 0;
             }
+            createShowNextCheck(file_index);
         }
 
         private void btnLeft_Click(object sender, EventArgs e)
         {
             int index = files.FindIndex(f => f.bitmap == (Bitmap)pctBoxWall.Image);
+            hidePrevCheck(index);
             if (index > 0)
             {
                 file_index = index - 1;
@@ -181,6 +256,59 @@ namespace BingPaper
                 file_index = files.Count() - 1;
                 pctBoxWall.Image = files[file_index].bitmap;
                 lblName.Text = files[file_index].name;
+            }
+            createShowNextCheck(file_index);
+        }
+
+        private void createShowNextCheck(int index)
+        {
+            CheckBox selecter = new CheckBox()
+            {
+                Location = new Point(10, 24),
+                Name = "Checker" + index,
+                Text = string.Empty
+            };
+            selecter.CheckedChanged += addWallToList;
+            ;
+            if (!selecters.Any(x => x.Name == ("Checker" + index)))
+            {
+                Controls.Add(selecter);
+
+                var pos = PointToScreen(selecter.Location);
+                pos = pctBoxWall.PointToClient(pos);
+                selecter.Parent = pctBoxWall;
+                selecter.Location = pos;
+                selecter.BackColor = Color.Transparent;
+
+                selecters.Add(selecter);
+            }
+            else
+                selecter = selecters[selecters.FindIndex(x => x.Name == ("Checker" + index))];
+            selecter.Visible = true;
+            if (!selecter.Checked)
+                selecter.Enabled = wallList.Count(x => x != null) == wallList.Length ? false : true;
+        }
+
+        private void hidePrevCheck(int index)
+        {
+            if (selecters.Any(x => x.Name == ("Checker" + index)))
+                selecters[selecters.FindIndex(x => x.Name == ("Checker" + index))].Visible = false;
+        }
+
+        private void addWallToList(object sender, EventArgs e)
+        {
+            CheckBox checker = (CheckBox)sender;
+            Bitmap image = (Bitmap)pctBoxWall.Image;
+            if (checker.Checked)
+            {
+                int count = wallList.Count(x => x != null);
+                if (count < wallList.Length)
+                {
+                    wallList[count] = image;
+                }
+            } else
+            {
+                wallList[Array.IndexOf(wallList, image)] = null;
             }
         }
     }
