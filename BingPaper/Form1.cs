@@ -44,11 +44,22 @@ namespace BingPaper
 
             DownloadJSON();
 
-            var pos = this.PointToScreen(btnSetWall.Location);
+            //var pos = this.PointToScreen(btnSetWall.Location);
+            //pos = pctBoxWall.PointToClient(pos);
+            //btnSetWall.Parent = pctBoxWall;
+            //btnSetWall.Location = pos;
+            //btnSetWall.BackColor = Color.Transparent;
+            elementOnPicture(btnSetWall);
+            elementOnPicture(bingPaper2);
+        }
+
+        private void elementOnPicture(Control control)
+        {
+            var pos = this.PointToScreen(control.Location);
             pos = pctBoxWall.PointToClient(pos);
-            btnSetWall.Parent = pctBoxWall;
-            btnSetWall.Location = pos;
-            btnSetWall.BackColor = Color.Transparent;
+            control.Parent = pctBoxWall;
+            control.Location = pos;
+            control.BackColor = Color.Transparent;
         }
 
         private void Interface_MouseDown(object sender, MouseEventArgs e)
@@ -179,15 +190,11 @@ namespace BingPaper
 
                 using (Graphics g = Graphics.FromImage(finalImage))
                 {
-                    //set background color
                     g.Clear(Color.Black);
-
-                    //go through each image and draw it on the final image
                     int offset = 0;
                     foreach (Bitmap image in wallList)
                     {
-                        g.DrawImage(image,
-                          new Rectangle(offset, 0, image.Width, image.Height));
+                        g.DrawImage(image, new Rectangle(offset, 0, image.Width, image.Height));
                         offset += image.Width;
                     }
                 }
@@ -310,6 +317,11 @@ namespace BingPaper
             {
                 wallList[Array.IndexOf(wallList, image)] = null;
             }
+        }
+
+        private void ShowInfo(object sender, EventArgs e)
+        {
+            //TODO: open tab with info, link to git, paypal, etc...
         }
     }
 

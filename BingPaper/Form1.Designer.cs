@@ -36,7 +36,9 @@
             this.btnMin = new System.Windows.Forms.Button();
             this.rightArrow1 = new BingPaper.ArrowRight();
             this.leftArrow1 = new BingPaper.ArrowLeft();
+            this.bingPaper2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pctBoxWall)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bingPaper2)).BeginInit();
             this.SuspendLayout();
             // 
             // pctBoxWall
@@ -135,12 +137,25 @@
             this.leftArrow1.UseVisualStyleBackColor = false;
             this.leftArrow1.Click += new System.EventHandler(this.btnLeft_Click);
             // 
+            // bingPaper2
+            // 
+            this.bingPaper2.BackColor = System.Drawing.Color.Transparent;
+            this.bingPaper2.BackgroundImage = global::BingPaper.Properties.Resources.me;
+            this.bingPaper2.Cursor = System.Windows.Forms.Cursors.Help;
+            this.bingPaper2.Location = new System.Drawing.Point(820, 544);
+            this.bingPaper2.Name = "bingPaper2";
+            this.bingPaper2.Size = new System.Drawing.Size(139, 15);
+            this.bingPaper2.TabIndex = 17;
+            this.bingPaper2.TabStop = false;
+            this.bingPaper2.Click += new System.EventHandler(this.ShowInfo);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(960, 560);
+            this.Controls.Add(this.bingPaper2);
             this.Controls.Add(this.btnSetWall);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnMin);
@@ -159,6 +174,7 @@
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Interface_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Interface_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.pctBoxWall)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bingPaper2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,6 +189,7 @@
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnMin;
+        private System.Windows.Forms.PictureBox bingPaper2;
     }
 }
 
