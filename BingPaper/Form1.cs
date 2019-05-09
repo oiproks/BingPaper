@@ -16,7 +16,7 @@ namespace BingPaper
     public partial class Form1 : Form
     {
         private const string bing = "http://www.bing.com";
-        private string file = string.Empty;
+        private string fileName = string.Empty;
         private int file_index = 0;
         private List<Files> files;
         bool mouseDown = false;
@@ -27,6 +27,7 @@ namespace BingPaper
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
 
+        #region Preliminary Work
         public Form1()
         {
             InitializeComponent();
@@ -61,29 +62,9 @@ namespace BingPaper
             control.Location = pos;
             control.BackColor = Color.Transparent;
         }
+        #endregion
 
-        private void Interface_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouseDown = true;
-            lastLocation = e.Location;
-        }
-
-        private void Interface_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDown)
-            {
-                Location = new Point(
-                    (Location.X - lastLocation.X) + e.X, (Location.Y - lastLocation.Y) + e.Y);
-
-                Update();
-            }
-        }
-
-        private void Interface_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-
+        #region Bing Magic
         private void DownloadJSON()
         {
             string url = Properties.Resources.bing_json_url_1;
@@ -135,99 +116,9 @@ namespace BingPaper
                 files.Add(new Files(fileUrl, Encoding.UTF8.GetString(Encoding.Default.GetBytes(name)), date, null));
             }
         }
+        #endregion
 
-        private void btnSetWall_Click(object sender, EventArgs e)
-        {
-            Bitmap bitmap;
-            CheckImagePath();
-            if (wallList.Count(x => x != null) == wallList.Length)
-            {
-                //TODO create image file with bitmaps in wallList
-                bitmap = CreateMultiScreenWall();
-                file = file.Insert(file.IndexOf(".bmp"), "_multi");
-                bitmap.Save(file, ImageFormat.Bmp);
-                SystemParametersInfo(20, 0, file, 0x01 | 0x02);
-            }
-            else
-            {
-                bitmap = (Bitmap)pctBoxWall.Image;
-                bitmap.Save(file, ImageFormat.Bmp);
-                SystemParametersInfo(0x0014, 0, file, 0x01 | 0x02);
-            }
-            foreach (CheckBox checker in selecters)
-            {
-                checker.CheckedChanged -= addWallToList;
-                checker.Checked = false;
-                checker.CheckedChanged += addWallToList;
-            }
-            Array.Clear(wallList, 0, wallList.Length);
-        }
-
-        private Bitmap CreateMultiScreenWall()
-        {
-            //TODO: Use screen resolution and position to resize and locate the wallpapers
-            //foreach (var screen in Screen.AllScreens)
-            //{
-            //    Console.WriteLine("Device Name: " + screen.DeviceName);
-            //    Console.WriteLine("Bounds: " + screen.Bounds.ToString());
-            //    Console.WriteLine("Type: " + screen.GetType().ToString());
-            //    Console.WriteLine("Working Area: " + screen.WorkingArea.ToString());
-            //    Console.WriteLine("Primary Screen: " + screen.Primary.ToString());
-            //}
-
-            Bitmap finalImage = null;
-            try
-            {
-                int width = 0;
-                int height = 0;
-                foreach (Bitmap wall in wallList)
-                {
-                    width += wall.Width;
-                    height = wall.Height > height ? wall.Height : height;
-                }
-
-                finalImage = new Bitmap(width, height);
-
-                using (Graphics g = Graphics.FromImage(finalImage))
-                {
-                    g.Clear(Color.Black);
-                    int offset = 0;
-                    foreach (Bitmap image in wallList)
-                    {
-                        g.DrawImage(image, new Rectangle(offset, 0, image.Width, image.Height));
-                        offset += image.Width;
-                    }
-                }
-                return finalImage;
-            }
-            catch (Exception ex)
-            {
-                if (finalImage != null)
-                    finalImage.Dispose();
-                throw ex;
-            }
-        }
-
-        private void CheckImagePath()
-        {
-            string path = AppDomain.CurrentDomain.BaseDirectory + "Images";
-            file = path + "\\wallpaper_" + file_index + ".bmp";
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-        }
-
-        private void btnMin_Click(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Minimized;
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
+        #region Buttons
         private void btnRight_Click(object sender, EventArgs e)
         {
             //int index = fileBitmaps.IndexOf((Bitmap)pctBoxWall.Image);
@@ -265,6 +156,101 @@ namespace BingPaper
                 lblName.Text = files[file_index].name;
             }
             createShowNextCheck(file_index);
+        }
+        
+        private void btnSetWall_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap;
+            CheckImagePath();
+            bitmap = (Bitmap)pctBoxWall.Image;
+            bitmap.Save(fileName, ImageFormat.Bmp);
+            SystemParametersInfo(0x0014, 0, fileName, 0x01 | 0x02);
+            foreach (CheckBox checker in selecters)
+            {
+                checker.CheckedChanged -= addWallToList;
+                checker.Checked = false;
+                checker.CheckedChanged += addWallToList;
+            }
+            Array.Clear(wallList, 0, wallList.Length);
+        }
+
+        private void btnSetMultitWall_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap;
+            CheckImagePath();
+            if (wallList.Count(x => x != null) == wallList.Length)
+            {
+                bitmap = CreateMultiScreenWall();
+                fileName = fileName.Substring(0, fileName.IndexOf("\\wallpaper_")) + "\\wallpaper_multi.bmp";
+                bitmap.Save(fileName, ImageFormat.Bmp);
+                SystemParametersInfo(20, 0, fileName, 0x01 | 0x02);
+            }
+            else
+            {
+                bitmap = (Bitmap)pctBoxWall.Image;
+                bitmap.Save(fileName, ImageFormat.Bmp);
+                SystemParametersInfo(0x0014, 0, fileName, 0x01 | 0x02);
+            }
+            foreach (CheckBox checker in selecters)
+            {
+                checker.CheckedChanged -= addWallToList;
+                checker.Checked = false;
+                checker.CheckedChanged += addWallToList;
+            }
+            Array.Clear(wallList, 0, wallList.Length);
+        }
+
+        private void ShowInfo(object sender, EventArgs e)
+        {
+            //TODO: open tab with info, link to git, paypal, etc...
+        }
+        #endregion
+
+        #region Set Multiple Wallpapers
+        private Bitmap CreateMultiScreenWall()
+        {
+            //TODO: Use screen resolution and position to resize and locate the wallpapers
+            //foreach (var screen in Screen.AllScreens)
+            //{
+            //    Console.WriteLine("Device Name: " + screen.DeviceName);
+            //    Console.WriteLine("Bounds: " + screen.Bounds.ToString());
+            //    Console.WriteLine("Type: " + screen.GetType().ToString());
+            //    Console.WriteLine("Working Area: " + screen.WorkingArea.ToString());
+            //    Console.WriteLine("Primary Screen: " + screen.Primary.ToString());
+            //}
+
+            Bitmap finalImage = null;
+            try
+            {
+                int width = 0;
+                int height = 0;
+                int x = 0;
+                foreach (Bitmap wall in wallList)
+                {
+                    width += wall.Width;
+                    height = wall.Height > height ? wall.Height : height;
+                }
+
+                finalImage = new Bitmap(width, height);
+
+                using (Graphics g = Graphics.FromImage(finalImage))
+                {
+                    g.Clear(Color.Black);
+                    int offset = 0;
+                    foreach (Bitmap image in wallList)
+                    {
+                        g.DrawImage(image, new Rectangle(offset, 0, image.Width, image.Height));
+                        offset += image.Width;
+                    }
+                }
+                return finalImage;
+            }
+            catch (Exception ex)
+            {
+                if (finalImage != null)
+                    finalImage.Dispose();
+                throw ex;
+            }
         }
 
         private void createShowNextCheck(int index)
@@ -318,11 +304,52 @@ namespace BingPaper
                 wallList[Array.IndexOf(wallList, image)] = null;
             }
         }
+        #endregion
 
-        private void ShowInfo(object sender, EventArgs e)
+        #region Utility
+        private void CheckImagePath()
         {
-            //TODO: open tab with info, link to git, paypal, etc...
+            string path = AppDomain.CurrentDomain.BaseDirectory + "Images";
+            fileName = path + "\\wallpaper_" + file_index + ".bmp";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
         }
+        #endregion
+
+        #region Form Commands
+        private void Interface_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void Interface_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                Location = new Point(
+                    (Location.X - lastLocation.X) + e.X, (Location.Y - lastLocation.Y) + e.Y);
+
+                Update();
+            }
+        }
+
+        private void Interface_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+        #endregion
     }
 
     public class Logger
