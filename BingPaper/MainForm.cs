@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace BingPaper
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private const string bing = "http://www.bing.com";
         private string fileName = string.Empty;
@@ -21,37 +21,34 @@ namespace BingPaper
         private List<Files> files;
         bool mouseDown = false;
         Point lastLocation;
-        Bitmap[] wallList;
-        List<CheckBox> selecters = new List<CheckBox>();
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
 
         #region Preliminary Work
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
 
             files = new List<Files>();
 
-            CheckImagePath();
+            Utilities.CheckImagePath();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            wallList = new Bitmap[Screen.AllScreens.Count()];
-
             Logger.WriteLog("Looking for new wallpaper");
 
             DownloadJSON();
 
-            //var pos = this.PointToScreen(btnSetWall.Location);
-            //pos = pctBoxWall.PointToClient(pos);
-            //btnSetWall.Parent = pctBoxWall;
-            //btnSetWall.Location = pos;
-            //btnSetWall.BackColor = Color.Transparent;
             elementOnPicture(btnSetWall);
+            elementOnPicture(btnSetMulti); 
             elementOnPicture(bingPaper2);
+
+            if (Screen.AllScreens.Count() > 1)
+            {
+                btnSetMulti.Visible = true;
+            }
         }
 
         private void elementOnPicture(Control control)
@@ -101,7 +98,6 @@ namespace BingPaper
             finally
             {
                 files = files.OrderByDescending(o => o.date).ToList();
-                createShowNextCheck(file_index);
             }
         }
 
@@ -123,7 +119,6 @@ namespace BingPaper
         {
             //int index = fileBitmaps.IndexOf((Bitmap)pctBoxWall.Image);
             int index = files.FindIndex(f => f.bitmap == (Bitmap)pctBoxWall.Image);
-            hidePrevCheck(index);
             if (index < files.Count - 1)
             {
                 file_index = index + 1;
@@ -136,13 +131,11 @@ namespace BingPaper
                 lblName.Text = files[0].name;
                 file_index = 0;
             }
-            createShowNextCheck(file_index);
         }
 
         private void btnLeft_Click(object sender, EventArgs e)
         {
             int index = files.FindIndex(f => f.bitmap == (Bitmap)pctBoxWall.Image);
-            hidePrevCheck(index);
             if (index > 0)
             {
                 file_index = index - 1;
@@ -155,166 +148,25 @@ namespace BingPaper
                 pctBoxWall.Image = files[file_index].bitmap;
                 lblName.Text = files[file_index].name;
             }
-            createShowNextCheck(file_index);
         }
         
         private void btnSetWall_Click(object sender, EventArgs e)
         {
             Bitmap bitmap;
-            CheckImagePath();
+            fileName = Utilities.CheckImagePath(file_index);
             bitmap = (Bitmap)pctBoxWall.Image;
             bitmap.Save(fileName, ImageFormat.Bmp);
-            SystemParametersInfo(0x0014, 0, fileName, 0x01 | 0x02);
-            foreach (CheckBox checker in selecters)
-            {
-                checker.CheckedChanged -= addWallToList;
-                checker.Checked = false;
-                checker.CheckedChanged += addWallToList;
-            }
-            Array.Clear(wallList, 0, wallList.Length);
+            Utilities.setWallpaper(0x0014, fileName);
         }
 
         private void btnSetMultitWall_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap;
-            CheckImagePath();
-            if (wallList.Count(x => x != null) == wallList.Length)
-            {
-                bitmap = CreateMultiScreenWall();
-                fileName = fileName.Substring(0, fileName.IndexOf("\\wallpaper_")) + "\\wallpaper_multi.bmp";
-                bitmap.Save(fileName, ImageFormat.Bmp);
-                SystemParametersInfo(20, 0, fileName, 0x01 | 0x02);
-            }
-            else
-            {
-                bitmap = (Bitmap)pctBoxWall.Image;
-                bitmap.Save(fileName, ImageFormat.Bmp);
-                SystemParametersInfo(0x0014, 0, fileName, 0x01 | 0x02);
-            }
-            foreach (CheckBox checker in selecters)
-            {
-                checker.CheckedChanged -= addWallToList;
-                checker.Checked = false;
-                checker.CheckedChanged += addWallToList;
-            }
-            Array.Clear(wallList, 0, wallList.Length);
+            //TODO: open multi form and pass needed variables
         }
 
         private void ShowInfo(object sender, EventArgs e)
         {
             //TODO: open tab with info, link to git, paypal, etc...
-        }
-        #endregion
-
-        #region Set Multiple Wallpapers
-        private Bitmap CreateMultiScreenWall()
-        {
-            //TODO: Use screen resolution and position to resize and locate the wallpapers
-            //foreach (var screen in Screen.AllScreens)
-            //{
-            //    Console.WriteLine("Device Name: " + screen.DeviceName);
-            //    Console.WriteLine("Bounds: " + screen.Bounds.ToString());
-            //    Console.WriteLine("Type: " + screen.GetType().ToString());
-            //    Console.WriteLine("Working Area: " + screen.WorkingArea.ToString());
-            //    Console.WriteLine("Primary Screen: " + screen.Primary.ToString());
-            //}
-
-            Bitmap finalImage = null;
-            try
-            {
-                int width = 0;
-                int height = 0;
-                int x = 0;
-                foreach (Bitmap wall in wallList)
-                {
-                    width += wall.Width;
-                    height = wall.Height > height ? wall.Height : height;
-                }
-
-                finalImage = new Bitmap(width, height);
-
-                using (Graphics g = Graphics.FromImage(finalImage))
-                {
-                    g.Clear(Color.Black);
-                    int offset = 0;
-                    foreach (Bitmap image in wallList)
-                    {
-                        g.DrawImage(image, new Rectangle(offset, 0, image.Width, image.Height));
-                        offset += image.Width;
-                    }
-                }
-                return finalImage;
-            }
-            catch (Exception ex)
-            {
-                if (finalImage != null)
-                    finalImage.Dispose();
-                throw ex;
-            }
-        }
-
-        private void createShowNextCheck(int index)
-        {
-            CheckBox selecter = new CheckBox()
-            {
-                Location = new Point(10, 24),
-                Name = "Checker" + index,
-                Text = string.Empty
-            };
-            selecter.CheckedChanged += addWallToList;
-            ;
-            if (!selecters.Any(x => x.Name == ("Checker" + index)))
-            {
-                Controls.Add(selecter);
-
-                var pos = PointToScreen(selecter.Location);
-                pos = pctBoxWall.PointToClient(pos);
-                selecter.Parent = pctBoxWall;
-                selecter.Location = pos;
-                selecter.BackColor = Color.Transparent;
-
-                selecters.Add(selecter);
-            }
-            else
-                selecter = selecters[selecters.FindIndex(x => x.Name == ("Checker" + index))];
-            selecter.Visible = true;
-            if (!selecter.Checked)
-                selecter.Enabled = wallList.Count(x => x != null) == wallList.Length ? false : true;
-        }
-
-        private void hidePrevCheck(int index)
-        {
-            if (selecters.Any(x => x.Name == ("Checker" + index)))
-                selecters[selecters.FindIndex(x => x.Name == ("Checker" + index))].Visible = false;
-        }
-
-        private void addWallToList(object sender, EventArgs e)
-        {
-            CheckBox checker = (CheckBox)sender;
-            Bitmap image = (Bitmap)pctBoxWall.Image;
-            if (checker.Checked)
-            {
-                int count = wallList.Count(x => x != null);
-                if (count < wallList.Length)
-                {
-                    wallList[count] = image;
-                }
-            } else
-            {
-                wallList[Array.IndexOf(wallList, image)] = null;
-            }
-        }
-        #endregion
-
-        #region Utility
-        private void CheckImagePath()
-        {
-            string path = AppDomain.CurrentDomain.BaseDirectory + "Images";
-            fileName = path + "\\wallpaper_" + file_index + ".bmp";
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
         }
         #endregion
 
@@ -340,6 +192,7 @@ namespace BingPaper
         {
             mouseDown = false;
         }
+
         private void btnMin_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;

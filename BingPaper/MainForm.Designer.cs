@@ -1,6 +1,6 @@
 ﻿namespace BingPaper
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pctBoxWall = new System.Windows.Forms.PictureBox();
             this.btnSetWall = new System.Windows.Forms.Button();
             this.lblName = new System.Windows.Forms.Label();
@@ -37,6 +37,7 @@
             this.rightArrow1 = new BingPaper.ArrowRight();
             this.leftArrow1 = new BingPaper.ArrowLeft();
             this.bingPaper2 = new System.Windows.Forms.PictureBox();
+            this.btnSetMulti = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pctBoxWall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bingPaper2)).BeginInit();
             this.SuspendLayout();
@@ -149,12 +150,31 @@
             this.bingPaper2.TabStop = false;
             this.bingPaper2.Click += new System.EventHandler(this.ShowInfo);
             // 
+            // btnSetMulti
+            // 
+            this.btnSetMulti.BackColor = System.Drawing.Color.Transparent;
+            this.btnSetMulti.BackgroundImage = global::BingPaper.Properties.Resources.set_multi;
+            this.btnSetMulti.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSetMulti.FlatAppearance.BorderSize = 0;
+            this.btnSetMulti.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSetMulti.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSetMulti.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSetMulti.ForeColor = System.Drawing.Color.Navy;
+            this.btnSetMulti.Location = new System.Drawing.Point(769, 71);
+            this.btnSetMulti.Name = "btnSetMulti";
+            this.btnSetMulti.Size = new System.Drawing.Size(187, 41);
+            this.btnSetMulti.TabIndex = 18;
+            this.btnSetMulti.UseVisualStyleBackColor = false;
+            this.btnSetMulti.Visible = false;
+            this.btnSetMulti.Click += new System.EventHandler(this.btnSetMultitWall_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(960, 560);
+            this.Controls.Add(this.btnSetMulti);
             this.Controls.Add(this.bingPaper2);
             this.Controls.Add(this.btnSetWall);
             this.Controls.Add(this.btnClose);
@@ -189,6 +209,7 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnMin;
         private System.Windows.Forms.PictureBox bingPaper2;
+        private System.Windows.Forms.Button btnSetMulti;
     }
 }
 
