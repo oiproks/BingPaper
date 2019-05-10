@@ -21,6 +21,8 @@ namespace BingPaper
         private List<Files> files;
         bool mouseDown = false;
         Point lastLocation;
+        MultiScreen multiScreen;
+        Info info;
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
@@ -29,6 +31,8 @@ namespace BingPaper
         public MainForm()
         {
             InitializeComponent();
+
+            Activated += Form1_Activated;
 
             files = new List<Files>();
 
@@ -58,6 +62,19 @@ namespace BingPaper
             control.Parent = pctBoxWall;
             control.Location = pos;
             control.BackColor = Color.Transparent;
+        }
+
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+            FormCollection fc = Application.OpenForms;
+            if (fc.Count > 1)
+                foreach (Form frm in fc)
+                {
+                    if (frm.Name.Equals("MultiScreen"))
+                        multiScreen.Focus();
+                    if (frm.Name.Equals("Info"))
+                        info.Focus();
+                }
         }
         #endregion
 
@@ -153,20 +170,33 @@ namespace BingPaper
         private void btnSetWall_Click(object sender, EventArgs e)
         {
             Bitmap bitmap;
-            fileName = Utilities.CheckImagePath(file_index);
+            fileName = Utilities.PrepareFileName(file_index);
             bitmap = (Bitmap)pctBoxWall.Image;
             bitmap.Save(fileName, ImageFormat.Bmp);
-            Utilities.setWallpaper(0x0014, fileName);
+            Utilities.SetWallpaper(0x0014, fileName);
         }
 
         private void btnSetMultitWall_Click(object sender, EventArgs e)
         {
-            //TODO: open multi form and pass needed variables
+            multiScreen = new MultiScreen(this, files);
+            multiScreen.Show();
+        }
+
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         private void ShowInfo(object sender, EventArgs e)
         {
             //TODO: open tab with info, link to git, paypal, etc...
+            info = new Info(this);
+            info.Show();
         }
         #endregion
 
@@ -192,49 +222,6 @@ namespace BingPaper
         {
             mouseDown = false;
         }
-
-        private void btnMin_Click(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Minimized;
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
         #endregion
-    }
-
-    public class Logger
-    {
-        public static void WriteLog(Exception ex)
-        {
-            StreamWriter sw = null;
-            try
-            {
-                sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "\\Log.txt", true);
-                sw.WriteLine(DateTime.Now.ToString() + ": " + ex.Source.ToString().Trim() + "; " + ex.Message.ToString().Trim());
-                sw.Flush();
-                sw.Close();
-            }
-            catch
-            {
-            }
-        }
-
-        public static void WriteLog(string message)
-        {
-            StreamWriter sw = null;
-            try
-            {
-                sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "\\Log.txt", true);
-                sw.WriteLine(DateTime.Now.ToString() + ": " + message);
-                sw.Flush();
-                sw.Close();
-            }
-            catch
-            {
-            }
-        }
     }
 }

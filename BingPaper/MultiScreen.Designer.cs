@@ -74,61 +74,62 @@
             this.radioButton10 = new System.Windows.Forms.RadioButton();
             this.radioButton11 = new System.Windows.Forms.RadioButton();
             this.radioButton12 = new System.Windows.Forms.RadioButton();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpWall4 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioButton13 = new System.Windows.Forms.RadioButton();
             this.radioButton14 = new System.Windows.Forms.RadioButton();
             this.radioButton15 = new System.Windows.Forms.RadioButton();
             this.radioButton16 = new System.Windows.Forms.RadioButton();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpWall5 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioButton17 = new System.Windows.Forms.RadioButton();
             this.radioButton18 = new System.Windows.Forms.RadioButton();
             this.radioButton19 = new System.Windows.Forms.RadioButton();
             this.radioButton20 = new System.Windows.Forms.RadioButton();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpWall6 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioButton21 = new System.Windows.Forms.RadioButton();
             this.radioButton22 = new System.Windows.Forms.RadioButton();
             this.radioButton23 = new System.Windows.Forms.RadioButton();
             this.radioButton24 = new System.Windows.Forms.RadioButton();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpWall7 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioButton25 = new System.Windows.Forms.RadioButton();
             this.radioButton26 = new System.Windows.Forms.RadioButton();
             this.radioButton27 = new System.Windows.Forms.RadioButton();
             this.radioButton28 = new System.Windows.Forms.RadioButton();
-            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpWall8 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioButton29 = new System.Windows.Forms.RadioButton();
             this.radioButton30 = new System.Windows.Forms.RadioButton();
             this.radioButton31 = new System.Windows.Forms.RadioButton();
             this.radioButton32 = new System.Windows.Forms.RadioButton();
-            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpWall9 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioButton33 = new System.Windows.Forms.RadioButton();
             this.radioButton34 = new System.Windows.Forms.RadioButton();
             this.radioButton35 = new System.Windows.Forms.RadioButton();
             this.radioButton36 = new System.Windows.Forms.RadioButton();
-            this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpWall10 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioButton37 = new System.Windows.Forms.RadioButton();
             this.radioButton38 = new System.Windows.Forms.RadioButton();
             this.radioButton39 = new System.Windows.Forms.RadioButton();
             this.radioButton40 = new System.Windows.Forms.RadioButton();
-            this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpWall11 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioButton41 = new System.Windows.Forms.RadioButton();
             this.radioButton42 = new System.Windows.Forms.RadioButton();
             this.radioButton43 = new System.Windows.Forms.RadioButton();
             this.radioButton44 = new System.Windows.Forms.RadioButton();
-            this.flowLayoutPanel10 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpWall12 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioButton45 = new System.Windows.Forms.RadioButton();
             this.radioButton46 = new System.Windows.Forms.RadioButton();
             this.radioButton47 = new System.Windows.Forms.RadioButton();
             this.radioButton48 = new System.Windows.Forms.RadioButton();
-            this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpWall13 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioButton49 = new System.Windows.Forms.RadioButton();
             this.radioButton50 = new System.Windows.Forms.RadioButton();
             this.radioButton51 = new System.Windows.Forms.RadioButton();
             this.radioButton52 = new System.Windows.Forms.RadioButton();
-            this.flowLayoutPanel12 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpWall14 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioButton53 = new System.Windows.Forms.RadioButton();
             this.radioButton54 = new System.Windows.Forms.RadioButton();
             this.radioButton55 = new System.Windows.Forms.RadioButton();
             this.radioButton56 = new System.Windows.Forms.RadioButton();
+            this.previewWall = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.wallpaper1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wallpaper2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wallpaper3)).BeginInit();
@@ -146,17 +147,18 @@
             this.flpWall1.SuspendLayout();
             this.flpWall2.SuspendLayout();
             this.flpWall3.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.flowLayoutPanel3.SuspendLayout();
-            this.flowLayoutPanel4.SuspendLayout();
-            this.flowLayoutPanel5.SuspendLayout();
-            this.flowLayoutPanel6.SuspendLayout();
-            this.flowLayoutPanel7.SuspendLayout();
-            this.flowLayoutPanel8.SuspendLayout();
-            this.flowLayoutPanel9.SuspendLayout();
-            this.flowLayoutPanel10.SuspendLayout();
-            this.flowLayoutPanel11.SuspendLayout();
-            this.flowLayoutPanel12.SuspendLayout();
+            this.flpWall4.SuspendLayout();
+            this.flpWall5.SuspendLayout();
+            this.flpWall6.SuspendLayout();
+            this.flpWall7.SuspendLayout();
+            this.flpWall8.SuspendLayout();
+            this.flpWall9.SuspendLayout();
+            this.flpWall10.SuspendLayout();
+            this.flpWall11.SuspendLayout();
+            this.flpWall12.SuspendLayout();
+            this.flpWall13.SuspendLayout();
+            this.flpWall14.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.previewWall)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -176,6 +178,7 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnApply
             // 
@@ -194,6 +197,7 @@
             this.btnApply.Text = "Apply";
             this.btnApply.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnApply.UseVisualStyleBackColor = false;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
             // wallpaper1
             // 
@@ -206,6 +210,8 @@
             this.wallpaper1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.wallpaper1.TabIndex = 16;
             this.wallpaper1.TabStop = false;
+            this.wallpaper1.MouseLeave += new System.EventHandler(this.HidePreview);
+            this.wallpaper1.MouseHover += new System.EventHandler(this.ShowPreview);
             // 
             // wallpaper2
             // 
@@ -218,6 +224,8 @@
             this.wallpaper2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.wallpaper2.TabIndex = 17;
             this.wallpaper2.TabStop = false;
+            this.wallpaper2.MouseLeave += new System.EventHandler(this.HidePreview);
+            this.wallpaper2.MouseHover += new System.EventHandler(this.ShowPreview);
             // 
             // wallpaper3
             // 
@@ -230,6 +238,8 @@
             this.wallpaper3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.wallpaper3.TabIndex = 18;
             this.wallpaper3.TabStop = false;
+            this.wallpaper3.MouseLeave += new System.EventHandler(this.HidePreview);
+            this.wallpaper3.MouseHover += new System.EventHandler(this.ShowPreview);
             // 
             // wallpaper4
             // 
@@ -242,6 +252,8 @@
             this.wallpaper4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.wallpaper4.TabIndex = 19;
             this.wallpaper4.TabStop = false;
+            this.wallpaper4.MouseLeave += new System.EventHandler(this.HidePreview);
+            this.wallpaper4.MouseHover += new System.EventHandler(this.ShowPreview);
             // 
             // wallpaper5
             // 
@@ -254,6 +266,8 @@
             this.wallpaper5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.wallpaper5.TabIndex = 20;
             this.wallpaper5.TabStop = false;
+            this.wallpaper5.MouseLeave += new System.EventHandler(this.HidePreview);
+            this.wallpaper5.MouseHover += new System.EventHandler(this.ShowPreview);
             // 
             // wallpaper6
             // 
@@ -266,6 +280,8 @@
             this.wallpaper6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.wallpaper6.TabIndex = 21;
             this.wallpaper6.TabStop = false;
+            this.wallpaper6.MouseLeave += new System.EventHandler(this.HidePreview);
+            this.wallpaper6.MouseHover += new System.EventHandler(this.ShowPreview);
             // 
             // wallpaper7
             // 
@@ -278,6 +294,8 @@
             this.wallpaper7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.wallpaper7.TabIndex = 22;
             this.wallpaper7.TabStop = false;
+            this.wallpaper7.MouseLeave += new System.EventHandler(this.HidePreview);
+            this.wallpaper7.MouseHover += new System.EventHandler(this.ShowPreview);
             // 
             // wallpaper14
             // 
@@ -290,6 +308,8 @@
             this.wallpaper14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.wallpaper14.TabIndex = 29;
             this.wallpaper14.TabStop = false;
+            this.wallpaper14.MouseLeave += new System.EventHandler(this.HidePreview);
+            this.wallpaper14.MouseHover += new System.EventHandler(this.ShowPreview);
             // 
             // wallpaper13
             // 
@@ -302,6 +322,8 @@
             this.wallpaper13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.wallpaper13.TabIndex = 28;
             this.wallpaper13.TabStop = false;
+            this.wallpaper13.MouseLeave += new System.EventHandler(this.HidePreview);
+            this.wallpaper13.MouseHover += new System.EventHandler(this.ShowPreview);
             // 
             // wallpaper12
             // 
@@ -314,6 +336,8 @@
             this.wallpaper12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.wallpaper12.TabIndex = 27;
             this.wallpaper12.TabStop = false;
+            this.wallpaper12.MouseLeave += new System.EventHandler(this.HidePreview);
+            this.wallpaper12.MouseHover += new System.EventHandler(this.ShowPreview);
             // 
             // wallpaper11
             // 
@@ -326,6 +350,8 @@
             this.wallpaper11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.wallpaper11.TabIndex = 26;
             this.wallpaper11.TabStop = false;
+            this.wallpaper11.MouseLeave += new System.EventHandler(this.HidePreview);
+            this.wallpaper11.MouseHover += new System.EventHandler(this.ShowPreview);
             // 
             // wallpaper10
             // 
@@ -338,6 +364,8 @@
             this.wallpaper10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.wallpaper10.TabIndex = 25;
             this.wallpaper10.TabStop = false;
+            this.wallpaper10.MouseLeave += new System.EventHandler(this.HidePreview);
+            this.wallpaper10.MouseHover += new System.EventHandler(this.ShowPreview);
             // 
             // wallpaper9
             // 
@@ -350,6 +378,8 @@
             this.wallpaper9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.wallpaper9.TabIndex = 24;
             this.wallpaper9.TabStop = false;
+            this.wallpaper9.MouseLeave += new System.EventHandler(this.HidePreview);
+            this.wallpaper9.MouseHover += new System.EventHandler(this.ShowPreview);
             // 
             // wallpaper8
             // 
@@ -362,6 +392,8 @@
             this.wallpaper8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.wallpaper8.TabIndex = 23;
             this.wallpaper8.TabStop = false;
+            this.wallpaper8.MouseLeave += new System.EventHandler(this.HidePreview);
+            this.wallpaper8.MouseHover += new System.EventHandler(this.ShowPreview);
             // 
             // label1
             // 
@@ -559,6 +591,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
+            this.radioButton1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton1.Location = new System.Drawing.Point(3, 3);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(65, 17);
@@ -570,6 +603,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
+            this.radioButton2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton2.Location = new System.Drawing.Point(74, 3);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(68, 17);
@@ -581,6 +615,7 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
+            this.radioButton3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton3.Location = new System.Drawing.Point(148, 3);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(68, 17);
@@ -592,6 +627,7 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
+            this.radioButton4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton4.Location = new System.Drawing.Point(222, 3);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(68, 17);
@@ -614,6 +650,7 @@
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
+            this.radioButton5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton5.Location = new System.Drawing.Point(3, 3);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(65, 17);
@@ -625,6 +662,7 @@
             // radioButton6
             // 
             this.radioButton6.AutoSize = true;
+            this.radioButton6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton6.Location = new System.Drawing.Point(74, 3);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(68, 17);
@@ -636,6 +674,7 @@
             // radioButton7
             // 
             this.radioButton7.AutoSize = true;
+            this.radioButton7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton7.Location = new System.Drawing.Point(148, 3);
             this.radioButton7.Name = "radioButton7";
             this.radioButton7.Size = new System.Drawing.Size(68, 17);
@@ -647,6 +686,7 @@
             // radioButton8
             // 
             this.radioButton8.AutoSize = true;
+            this.radioButton8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton8.Location = new System.Drawing.Point(222, 3);
             this.radioButton8.Name = "radioButton8";
             this.radioButton8.Size = new System.Drawing.Size(68, 17);
@@ -669,6 +709,7 @@
             // radioButton9
             // 
             this.radioButton9.AutoSize = true;
+            this.radioButton9.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton9.Location = new System.Drawing.Point(3, 3);
             this.radioButton9.Name = "radioButton9";
             this.radioButton9.Size = new System.Drawing.Size(65, 17);
@@ -680,6 +721,7 @@
             // radioButton10
             // 
             this.radioButton10.AutoSize = true;
+            this.radioButton10.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton10.Location = new System.Drawing.Point(74, 3);
             this.radioButton10.Name = "radioButton10";
             this.radioButton10.Size = new System.Drawing.Size(68, 17);
@@ -691,6 +733,7 @@
             // radioButton11
             // 
             this.radioButton11.AutoSize = true;
+            this.radioButton11.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton11.Location = new System.Drawing.Point(148, 3);
             this.radioButton11.Name = "radioButton11";
             this.radioButton11.Size = new System.Drawing.Size(68, 17);
@@ -702,6 +745,7 @@
             // radioButton12
             // 
             this.radioButton12.AutoSize = true;
+            this.radioButton12.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton12.Location = new System.Drawing.Point(222, 3);
             this.radioButton12.Name = "radioButton12";
             this.radioButton12.Size = new System.Drawing.Size(68, 17);
@@ -710,20 +754,21 @@
             this.radioButton12.Text = "Screen 4";
             this.radioButton12.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel2
+            // flpWall4
             // 
-            this.flowLayoutPanel2.Controls.Add(this.radioButton13);
-            this.flowLayoutPanel2.Controls.Add(this.radioButton14);
-            this.flowLayoutPanel2.Controls.Add(this.radioButton15);
-            this.flowLayoutPanel2.Controls.Add(this.radioButton16);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(138, 275);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(306, 24);
-            this.flowLayoutPanel2.TabIndex = 46;
+            this.flpWall4.Controls.Add(this.radioButton13);
+            this.flpWall4.Controls.Add(this.radioButton14);
+            this.flpWall4.Controls.Add(this.radioButton15);
+            this.flpWall4.Controls.Add(this.radioButton16);
+            this.flpWall4.Location = new System.Drawing.Point(138, 275);
+            this.flpWall4.Name = "flpWall4";
+            this.flpWall4.Size = new System.Drawing.Size(306, 24);
+            this.flpWall4.TabIndex = 46;
             // 
             // radioButton13
             // 
             this.radioButton13.AutoSize = true;
+            this.radioButton13.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton13.Location = new System.Drawing.Point(3, 3);
             this.radioButton13.Name = "radioButton13";
             this.radioButton13.Size = new System.Drawing.Size(65, 17);
@@ -735,6 +780,7 @@
             // radioButton14
             // 
             this.radioButton14.AutoSize = true;
+            this.radioButton14.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton14.Location = new System.Drawing.Point(74, 3);
             this.radioButton14.Name = "radioButton14";
             this.radioButton14.Size = new System.Drawing.Size(68, 17);
@@ -746,6 +792,7 @@
             // radioButton15
             // 
             this.radioButton15.AutoSize = true;
+            this.radioButton15.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton15.Location = new System.Drawing.Point(148, 3);
             this.radioButton15.Name = "radioButton15";
             this.radioButton15.Size = new System.Drawing.Size(68, 17);
@@ -757,6 +804,7 @@
             // radioButton16
             // 
             this.radioButton16.AutoSize = true;
+            this.radioButton16.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton16.Location = new System.Drawing.Point(222, 3);
             this.radioButton16.Name = "radioButton16";
             this.radioButton16.Size = new System.Drawing.Size(68, 17);
@@ -765,16 +813,17 @@
             this.radioButton16.Text = "Screen 4";
             this.radioButton16.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel3
+            // flpWall5
             // 
-            this.flowLayoutPanel3.Controls.Add(this.radioButton17);
-            this.flowLayoutPanel3.Controls.Add(this.radioButton18);
-            this.flowLayoutPanel3.Controls.Add(this.radioButton19);
-            this.flowLayoutPanel3.Controls.Add(this.radioButton20);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(138, 348);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(306, 24);
-            this.flowLayoutPanel3.TabIndex = 46;
+            this.flpWall5.Controls.Add(this.radioButton17);
+            this.flpWall5.Controls.Add(this.radioButton18);
+            this.flpWall5.Controls.Add(this.radioButton19);
+            this.flpWall5.Controls.Add(this.radioButton20);
+            this.flpWall5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.flpWall5.Location = new System.Drawing.Point(138, 348);
+            this.flpWall5.Name = "flpWall5";
+            this.flpWall5.Size = new System.Drawing.Size(306, 24);
+            this.flpWall5.TabIndex = 46;
             // 
             // radioButton17
             // 
@@ -820,16 +869,17 @@
             this.radioButton20.Text = "Screen 4";
             this.radioButton20.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel4
+            // flpWall6
             // 
-            this.flowLayoutPanel4.Controls.Add(this.radioButton21);
-            this.flowLayoutPanel4.Controls.Add(this.radioButton22);
-            this.flowLayoutPanel4.Controls.Add(this.radioButton23);
-            this.flowLayoutPanel4.Controls.Add(this.radioButton24);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(138, 421);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(306, 24);
-            this.flowLayoutPanel4.TabIndex = 46;
+            this.flpWall6.Controls.Add(this.radioButton21);
+            this.flpWall6.Controls.Add(this.radioButton22);
+            this.flpWall6.Controls.Add(this.radioButton23);
+            this.flpWall6.Controls.Add(this.radioButton24);
+            this.flpWall6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.flpWall6.Location = new System.Drawing.Point(138, 421);
+            this.flpWall6.Name = "flpWall6";
+            this.flpWall6.Size = new System.Drawing.Size(306, 24);
+            this.flpWall6.TabIndex = 46;
             // 
             // radioButton21
             // 
@@ -875,16 +925,17 @@
             this.radioButton24.Text = "Screen 4";
             this.radioButton24.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel5
+            // flpWall7
             // 
-            this.flowLayoutPanel5.Controls.Add(this.radioButton25);
-            this.flowLayoutPanel5.Controls.Add(this.radioButton26);
-            this.flowLayoutPanel5.Controls.Add(this.radioButton27);
-            this.flowLayoutPanel5.Controls.Add(this.radioButton28);
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(138, 494);
-            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(306, 24);
-            this.flowLayoutPanel5.TabIndex = 46;
+            this.flpWall7.Controls.Add(this.radioButton25);
+            this.flpWall7.Controls.Add(this.radioButton26);
+            this.flpWall7.Controls.Add(this.radioButton27);
+            this.flpWall7.Controls.Add(this.radioButton28);
+            this.flpWall7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.flpWall7.Location = new System.Drawing.Point(138, 494);
+            this.flpWall7.Name = "flpWall7";
+            this.flpWall7.Size = new System.Drawing.Size(306, 24);
+            this.flpWall7.TabIndex = 46;
             // 
             // radioButton25
             // 
@@ -930,20 +981,21 @@
             this.radioButton28.Text = "Screen 4";
             this.radioButton28.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel6
+            // flpWall8
             // 
-            this.flowLayoutPanel6.Controls.Add(this.radioButton29);
-            this.flowLayoutPanel6.Controls.Add(this.radioButton30);
-            this.flowLayoutPanel6.Controls.Add(this.radioButton31);
-            this.flowLayoutPanel6.Controls.Add(this.radioButton32);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(576, 56);
-            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(306, 24);
-            this.flowLayoutPanel6.TabIndex = 46;
+            this.flpWall8.Controls.Add(this.radioButton29);
+            this.flpWall8.Controls.Add(this.radioButton30);
+            this.flpWall8.Controls.Add(this.radioButton31);
+            this.flpWall8.Controls.Add(this.radioButton32);
+            this.flpWall8.Location = new System.Drawing.Point(576, 56);
+            this.flpWall8.Name = "flpWall8";
+            this.flpWall8.Size = new System.Drawing.Size(306, 24);
+            this.flpWall8.TabIndex = 46;
             // 
             // radioButton29
             // 
             this.radioButton29.AutoSize = true;
+            this.radioButton29.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton29.Location = new System.Drawing.Point(3, 3);
             this.radioButton29.Name = "radioButton29";
             this.radioButton29.Size = new System.Drawing.Size(65, 17);
@@ -955,6 +1007,7 @@
             // radioButton30
             // 
             this.radioButton30.AutoSize = true;
+            this.radioButton30.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton30.Location = new System.Drawing.Point(74, 3);
             this.radioButton30.Name = "radioButton30";
             this.radioButton30.Size = new System.Drawing.Size(68, 17);
@@ -966,6 +1019,7 @@
             // radioButton31
             // 
             this.radioButton31.AutoSize = true;
+            this.radioButton31.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton31.Location = new System.Drawing.Point(148, 3);
             this.radioButton31.Name = "radioButton31";
             this.radioButton31.Size = new System.Drawing.Size(68, 17);
@@ -977,6 +1031,7 @@
             // radioButton32
             // 
             this.radioButton32.AutoSize = true;
+            this.radioButton32.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton32.Location = new System.Drawing.Point(222, 3);
             this.radioButton32.Name = "radioButton32";
             this.radioButton32.Size = new System.Drawing.Size(68, 17);
@@ -985,20 +1040,21 @@
             this.radioButton32.Text = "Screen 4";
             this.radioButton32.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel7
+            // flpWall9
             // 
-            this.flowLayoutPanel7.Controls.Add(this.radioButton33);
-            this.flowLayoutPanel7.Controls.Add(this.radioButton34);
-            this.flowLayoutPanel7.Controls.Add(this.radioButton35);
-            this.flowLayoutPanel7.Controls.Add(this.radioButton36);
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(576, 129);
-            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(306, 24);
-            this.flowLayoutPanel7.TabIndex = 46;
+            this.flpWall9.Controls.Add(this.radioButton33);
+            this.flpWall9.Controls.Add(this.radioButton34);
+            this.flpWall9.Controls.Add(this.radioButton35);
+            this.flpWall9.Controls.Add(this.radioButton36);
+            this.flpWall9.Location = new System.Drawing.Point(576, 129);
+            this.flpWall9.Name = "flpWall9";
+            this.flpWall9.Size = new System.Drawing.Size(306, 24);
+            this.flpWall9.TabIndex = 46;
             // 
             // radioButton33
             // 
             this.radioButton33.AutoSize = true;
+            this.radioButton33.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton33.Location = new System.Drawing.Point(3, 3);
             this.radioButton33.Name = "radioButton33";
             this.radioButton33.Size = new System.Drawing.Size(65, 17);
@@ -1010,6 +1066,7 @@
             // radioButton34
             // 
             this.radioButton34.AutoSize = true;
+            this.radioButton34.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton34.Location = new System.Drawing.Point(74, 3);
             this.radioButton34.Name = "radioButton34";
             this.radioButton34.Size = new System.Drawing.Size(68, 17);
@@ -1021,6 +1078,7 @@
             // radioButton35
             // 
             this.radioButton35.AutoSize = true;
+            this.radioButton35.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton35.Location = new System.Drawing.Point(148, 3);
             this.radioButton35.Name = "radioButton35";
             this.radioButton35.Size = new System.Drawing.Size(68, 17);
@@ -1032,6 +1090,7 @@
             // radioButton36
             // 
             this.radioButton36.AutoSize = true;
+            this.radioButton36.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton36.Location = new System.Drawing.Point(222, 3);
             this.radioButton36.Name = "radioButton36";
             this.radioButton36.Size = new System.Drawing.Size(68, 17);
@@ -1040,20 +1099,21 @@
             this.radioButton36.Text = "Screen 4";
             this.radioButton36.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel8
+            // flpWall10
             // 
-            this.flowLayoutPanel8.Controls.Add(this.radioButton37);
-            this.flowLayoutPanel8.Controls.Add(this.radioButton38);
-            this.flowLayoutPanel8.Controls.Add(this.radioButton39);
-            this.flowLayoutPanel8.Controls.Add(this.radioButton40);
-            this.flowLayoutPanel8.Location = new System.Drawing.Point(576, 202);
-            this.flowLayoutPanel8.Name = "flowLayoutPanel8";
-            this.flowLayoutPanel8.Size = new System.Drawing.Size(306, 24);
-            this.flowLayoutPanel8.TabIndex = 46;
+            this.flpWall10.Controls.Add(this.radioButton37);
+            this.flpWall10.Controls.Add(this.radioButton38);
+            this.flpWall10.Controls.Add(this.radioButton39);
+            this.flpWall10.Controls.Add(this.radioButton40);
+            this.flpWall10.Location = new System.Drawing.Point(576, 202);
+            this.flpWall10.Name = "flpWall10";
+            this.flpWall10.Size = new System.Drawing.Size(306, 24);
+            this.flpWall10.TabIndex = 46;
             // 
             // radioButton37
             // 
             this.radioButton37.AutoSize = true;
+            this.radioButton37.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton37.Location = new System.Drawing.Point(3, 3);
             this.radioButton37.Name = "radioButton37";
             this.radioButton37.Size = new System.Drawing.Size(65, 17);
@@ -1065,6 +1125,7 @@
             // radioButton38
             // 
             this.radioButton38.AutoSize = true;
+            this.radioButton38.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton38.Location = new System.Drawing.Point(74, 3);
             this.radioButton38.Name = "radioButton38";
             this.radioButton38.Size = new System.Drawing.Size(68, 17);
@@ -1076,6 +1137,7 @@
             // radioButton39
             // 
             this.radioButton39.AutoSize = true;
+            this.radioButton39.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton39.Location = new System.Drawing.Point(148, 3);
             this.radioButton39.Name = "radioButton39";
             this.radioButton39.Size = new System.Drawing.Size(68, 17);
@@ -1087,6 +1149,7 @@
             // radioButton40
             // 
             this.radioButton40.AutoSize = true;
+            this.radioButton40.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton40.Location = new System.Drawing.Point(222, 3);
             this.radioButton40.Name = "radioButton40";
             this.radioButton40.Size = new System.Drawing.Size(68, 17);
@@ -1095,20 +1158,21 @@
             this.radioButton40.Text = "Screen 4";
             this.radioButton40.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel9
+            // flpWall11
             // 
-            this.flowLayoutPanel9.Controls.Add(this.radioButton41);
-            this.flowLayoutPanel9.Controls.Add(this.radioButton42);
-            this.flowLayoutPanel9.Controls.Add(this.radioButton43);
-            this.flowLayoutPanel9.Controls.Add(this.radioButton44);
-            this.flowLayoutPanel9.Location = new System.Drawing.Point(576, 275);
-            this.flowLayoutPanel9.Name = "flowLayoutPanel9";
-            this.flowLayoutPanel9.Size = new System.Drawing.Size(306, 24);
-            this.flowLayoutPanel9.TabIndex = 46;
+            this.flpWall11.Controls.Add(this.radioButton41);
+            this.flpWall11.Controls.Add(this.radioButton42);
+            this.flpWall11.Controls.Add(this.radioButton43);
+            this.flpWall11.Controls.Add(this.radioButton44);
+            this.flpWall11.Location = new System.Drawing.Point(576, 275);
+            this.flpWall11.Name = "flpWall11";
+            this.flpWall11.Size = new System.Drawing.Size(306, 24);
+            this.flpWall11.TabIndex = 46;
             // 
             // radioButton41
             // 
             this.radioButton41.AutoSize = true;
+            this.radioButton41.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton41.Location = new System.Drawing.Point(3, 3);
             this.radioButton41.Name = "radioButton41";
             this.radioButton41.Size = new System.Drawing.Size(65, 17);
@@ -1120,6 +1184,7 @@
             // radioButton42
             // 
             this.radioButton42.AutoSize = true;
+            this.radioButton42.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton42.Location = new System.Drawing.Point(74, 3);
             this.radioButton42.Name = "radioButton42";
             this.radioButton42.Size = new System.Drawing.Size(68, 17);
@@ -1131,6 +1196,7 @@
             // radioButton43
             // 
             this.radioButton43.AutoSize = true;
+            this.radioButton43.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton43.Location = new System.Drawing.Point(148, 3);
             this.radioButton43.Name = "radioButton43";
             this.radioButton43.Size = new System.Drawing.Size(68, 17);
@@ -1142,6 +1208,7 @@
             // radioButton44
             // 
             this.radioButton44.AutoSize = true;
+            this.radioButton44.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radioButton44.Location = new System.Drawing.Point(222, 3);
             this.radioButton44.Name = "radioButton44";
             this.radioButton44.Size = new System.Drawing.Size(68, 17);
@@ -1150,16 +1217,17 @@
             this.radioButton44.Text = "Screen 4";
             this.radioButton44.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel10
+            // flpWall12
             // 
-            this.flowLayoutPanel10.Controls.Add(this.radioButton45);
-            this.flowLayoutPanel10.Controls.Add(this.radioButton46);
-            this.flowLayoutPanel10.Controls.Add(this.radioButton47);
-            this.flowLayoutPanel10.Controls.Add(this.radioButton48);
-            this.flowLayoutPanel10.Location = new System.Drawing.Point(576, 348);
-            this.flowLayoutPanel10.Name = "flowLayoutPanel10";
-            this.flowLayoutPanel10.Size = new System.Drawing.Size(306, 24);
-            this.flowLayoutPanel10.TabIndex = 46;
+            this.flpWall12.Controls.Add(this.radioButton45);
+            this.flpWall12.Controls.Add(this.radioButton46);
+            this.flpWall12.Controls.Add(this.radioButton47);
+            this.flpWall12.Controls.Add(this.radioButton48);
+            this.flpWall12.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.flpWall12.Location = new System.Drawing.Point(576, 348);
+            this.flpWall12.Name = "flpWall12";
+            this.flpWall12.Size = new System.Drawing.Size(306, 24);
+            this.flpWall12.TabIndex = 46;
             // 
             // radioButton45
             // 
@@ -1205,16 +1273,17 @@
             this.radioButton48.Text = "Screen 4";
             this.radioButton48.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel11
+            // flpWall13
             // 
-            this.flowLayoutPanel11.Controls.Add(this.radioButton49);
-            this.flowLayoutPanel11.Controls.Add(this.radioButton50);
-            this.flowLayoutPanel11.Controls.Add(this.radioButton51);
-            this.flowLayoutPanel11.Controls.Add(this.radioButton52);
-            this.flowLayoutPanel11.Location = new System.Drawing.Point(576, 421);
-            this.flowLayoutPanel11.Name = "flowLayoutPanel11";
-            this.flowLayoutPanel11.Size = new System.Drawing.Size(306, 24);
-            this.flowLayoutPanel11.TabIndex = 46;
+            this.flpWall13.Controls.Add(this.radioButton49);
+            this.flpWall13.Controls.Add(this.radioButton50);
+            this.flpWall13.Controls.Add(this.radioButton51);
+            this.flpWall13.Controls.Add(this.radioButton52);
+            this.flpWall13.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.flpWall13.Location = new System.Drawing.Point(576, 421);
+            this.flpWall13.Name = "flpWall13";
+            this.flpWall13.Size = new System.Drawing.Size(306, 24);
+            this.flpWall13.TabIndex = 46;
             // 
             // radioButton49
             // 
@@ -1260,16 +1329,17 @@
             this.radioButton52.Text = "Screen 4";
             this.radioButton52.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel12
+            // flpWall14
             // 
-            this.flowLayoutPanel12.Controls.Add(this.radioButton53);
-            this.flowLayoutPanel12.Controls.Add(this.radioButton54);
-            this.flowLayoutPanel12.Controls.Add(this.radioButton55);
-            this.flowLayoutPanel12.Controls.Add(this.radioButton56);
-            this.flowLayoutPanel12.Location = new System.Drawing.Point(576, 494);
-            this.flowLayoutPanel12.Name = "flowLayoutPanel12";
-            this.flowLayoutPanel12.Size = new System.Drawing.Size(306, 24);
-            this.flowLayoutPanel12.TabIndex = 46;
+            this.flpWall14.Controls.Add(this.radioButton53);
+            this.flpWall14.Controls.Add(this.radioButton54);
+            this.flpWall14.Controls.Add(this.radioButton55);
+            this.flpWall14.Controls.Add(this.radioButton56);
+            this.flpWall14.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.flpWall14.Location = new System.Drawing.Point(576, 494);
+            this.flpWall14.Name = "flpWall14";
+            this.flpWall14.Size = new System.Drawing.Size(306, 24);
+            this.flpWall14.TabIndex = 46;
             // 
             // radioButton53
             // 
@@ -1315,27 +1385,42 @@
             this.radioButton56.Text = "Screen 4";
             this.radioButton56.UseVisualStyleBackColor = true;
             // 
+            // previewWall
+            // 
+            this.previewWall.BackColor = System.Drawing.Color.Transparent;
+            this.previewWall.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.previewWall.Location = new System.Drawing.Point(894, 567);
+            this.previewWall.MaximumSize = new System.Drawing.Size(480, 268);
+            this.previewWall.MinimumSize = new System.Drawing.Size(480, 268);
+            this.previewWall.Name = "previewWall";
+            this.previewWall.Size = new System.Drawing.Size(480, 268);
+            this.previewWall.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.previewWall.TabIndex = 47;
+            this.previewWall.TabStop = false;
+            this.previewWall.Visible = false;
+            // 
             // MultiScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(900, 573);
+            this.Controls.Add(this.previewWall);
             this.Controls.Add(this.flpWall1);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.flowLayoutPanel12);
-            this.Controls.Add(this.flowLayoutPanel11);
-            this.Controls.Add(this.flowLayoutPanel10);
-            this.Controls.Add(this.flowLayoutPanel9);
-            this.Controls.Add(this.flowLayoutPanel8);
-            this.Controls.Add(this.flowLayoutPanel7);
-            this.Controls.Add(this.flowLayoutPanel6);
-            this.Controls.Add(this.flowLayoutPanel5);
-            this.Controls.Add(this.flowLayoutPanel4);
-            this.Controls.Add(this.flowLayoutPanel3);
-            this.Controls.Add(this.flowLayoutPanel2);
+            this.Controls.Add(this.flpWall14);
+            this.Controls.Add(this.flpWall13);
+            this.Controls.Add(this.flpWall12);
+            this.Controls.Add(this.flpWall11);
+            this.Controls.Add(this.flpWall10);
+            this.Controls.Add(this.flpWall9);
+            this.Controls.Add(this.flpWall8);
+            this.Controls.Add(this.flpWall7);
+            this.Controls.Add(this.flpWall6);
+            this.Controls.Add(this.flpWall5);
+            this.Controls.Add(this.flpWall4);
             this.Controls.Add(this.flpWall3);
             this.Controls.Add(this.flpWall2);
             this.Controls.Add(this.label11);
@@ -1366,9 +1451,17 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnApply);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximumSize = new System.Drawing.Size(900, 573);
+            this.MinimumSize = new System.Drawing.Size(900, 573);
             this.Name = "MultiScreen";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MultiScreen";
+            this.Load += new System.EventHandler(this.MultiScreen_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Interface_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Interface_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Interface_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.wallpaper1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wallpaper2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wallpaper3)).EndInit();
@@ -1389,28 +1482,29 @@
             this.flpWall2.PerformLayout();
             this.flpWall3.ResumeLayout(false);
             this.flpWall3.PerformLayout();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
-            this.flowLayoutPanel3.ResumeLayout(false);
-            this.flowLayoutPanel3.PerformLayout();
-            this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel4.PerformLayout();
-            this.flowLayoutPanel5.ResumeLayout(false);
-            this.flowLayoutPanel5.PerformLayout();
-            this.flowLayoutPanel6.ResumeLayout(false);
-            this.flowLayoutPanel6.PerformLayout();
-            this.flowLayoutPanel7.ResumeLayout(false);
-            this.flowLayoutPanel7.PerformLayout();
-            this.flowLayoutPanel8.ResumeLayout(false);
-            this.flowLayoutPanel8.PerformLayout();
-            this.flowLayoutPanel9.ResumeLayout(false);
-            this.flowLayoutPanel9.PerformLayout();
-            this.flowLayoutPanel10.ResumeLayout(false);
-            this.flowLayoutPanel10.PerformLayout();
-            this.flowLayoutPanel11.ResumeLayout(false);
-            this.flowLayoutPanel11.PerformLayout();
-            this.flowLayoutPanel12.ResumeLayout(false);
-            this.flowLayoutPanel12.PerformLayout();
+            this.flpWall4.ResumeLayout(false);
+            this.flpWall4.PerformLayout();
+            this.flpWall5.ResumeLayout(false);
+            this.flpWall5.PerformLayout();
+            this.flpWall6.ResumeLayout(false);
+            this.flpWall6.PerformLayout();
+            this.flpWall7.ResumeLayout(false);
+            this.flpWall7.PerformLayout();
+            this.flpWall8.ResumeLayout(false);
+            this.flpWall8.PerformLayout();
+            this.flpWall9.ResumeLayout(false);
+            this.flpWall9.PerformLayout();
+            this.flpWall10.ResumeLayout(false);
+            this.flpWall10.PerformLayout();
+            this.flpWall11.ResumeLayout(false);
+            this.flpWall11.PerformLayout();
+            this.flpWall12.ResumeLayout(false);
+            this.flpWall12.PerformLayout();
+            this.flpWall13.ResumeLayout(false);
+            this.flpWall13.PerformLayout();
+            this.flpWall14.ResumeLayout(false);
+            this.flpWall14.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.previewWall)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1463,60 +1557,61 @@
         private System.Windows.Forms.RadioButton radioButton10;
         private System.Windows.Forms.RadioButton radioButton11;
         private System.Windows.Forms.RadioButton radioButton12;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel flpWall4;
         private System.Windows.Forms.RadioButton radioButton13;
         private System.Windows.Forms.RadioButton radioButton14;
         private System.Windows.Forms.RadioButton radioButton15;
         private System.Windows.Forms.RadioButton radioButton16;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.FlowLayoutPanel flpWall5;
         private System.Windows.Forms.RadioButton radioButton17;
         private System.Windows.Forms.RadioButton radioButton18;
         private System.Windows.Forms.RadioButton radioButton19;
         private System.Windows.Forms.RadioButton radioButton20;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.FlowLayoutPanel flpWall6;
         private System.Windows.Forms.RadioButton radioButton21;
         private System.Windows.Forms.RadioButton radioButton22;
         private System.Windows.Forms.RadioButton radioButton23;
         private System.Windows.Forms.RadioButton radioButton24;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
+        private System.Windows.Forms.FlowLayoutPanel flpWall7;
         private System.Windows.Forms.RadioButton radioButton25;
         private System.Windows.Forms.RadioButton radioButton26;
         private System.Windows.Forms.RadioButton radioButton27;
         private System.Windows.Forms.RadioButton radioButton28;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
+        private System.Windows.Forms.FlowLayoutPanel flpWall8;
         private System.Windows.Forms.RadioButton radioButton29;
         private System.Windows.Forms.RadioButton radioButton30;
         private System.Windows.Forms.RadioButton radioButton31;
         private System.Windows.Forms.RadioButton radioButton32;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
+        private System.Windows.Forms.FlowLayoutPanel flpWall9;
         private System.Windows.Forms.RadioButton radioButton33;
         private System.Windows.Forms.RadioButton radioButton34;
         private System.Windows.Forms.RadioButton radioButton35;
         private System.Windows.Forms.RadioButton radioButton36;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel8;
+        private System.Windows.Forms.FlowLayoutPanel flpWall10;
         private System.Windows.Forms.RadioButton radioButton37;
         private System.Windows.Forms.RadioButton radioButton38;
         private System.Windows.Forms.RadioButton radioButton39;
         private System.Windows.Forms.RadioButton radioButton40;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel9;
+        private System.Windows.Forms.FlowLayoutPanel flpWall11;
         private System.Windows.Forms.RadioButton radioButton41;
         private System.Windows.Forms.RadioButton radioButton42;
         private System.Windows.Forms.RadioButton radioButton43;
         private System.Windows.Forms.RadioButton radioButton44;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel10;
+        private System.Windows.Forms.FlowLayoutPanel flpWall12;
         private System.Windows.Forms.RadioButton radioButton45;
         private System.Windows.Forms.RadioButton radioButton46;
         private System.Windows.Forms.RadioButton radioButton47;
         private System.Windows.Forms.RadioButton radioButton48;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel11;
+        private System.Windows.Forms.FlowLayoutPanel flpWall13;
         private System.Windows.Forms.RadioButton radioButton49;
         private System.Windows.Forms.RadioButton radioButton50;
         private System.Windows.Forms.RadioButton radioButton51;
         private System.Windows.Forms.RadioButton radioButton52;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel12;
+        private System.Windows.Forms.FlowLayoutPanel flpWall14;
         private System.Windows.Forms.RadioButton radioButton53;
         private System.Windows.Forms.RadioButton radioButton54;
         private System.Windows.Forms.RadioButton radioButton55;
         private System.Windows.Forms.RadioButton radioButton56;
+        private System.Windows.Forms.PictureBox previewWall;
     }
 }

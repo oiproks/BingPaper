@@ -25,30 +25,23 @@ namespace BingPaper
             }
             catch (Exception ex)
             {
-
+                Logger.WriteLog(ex);
             }
         }
 
-        public static string CheckImagePath(int fileIndex)
+        public static string PrepareFileName(int fileIndex)
         {
-            string fileName = string.Empty;
-            try
-            {
-                string path = AppDomain.CurrentDomain.BaseDirectory + "Images";
-                fileName = path + "\\wallpaper_" + fileIndex + ".bmp";
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-            }
-            catch (Exception ex)
-            {
-                
-            }
+            string fileName = AppDomain.CurrentDomain.BaseDirectory + "Images" + "\\wallpaper_" + fileIndex + ".bmp";
             return fileName;
         }
 
-        public static void setWallpaper (Int32 val, string fileName)
+        public static string PrepareFileName(string multi)
+        {
+            string fileName = AppDomain.CurrentDomain.BaseDirectory + "Images" + "\\wallpaper_" + multi + ".bmp";
+            return fileName;
+        }
+
+        public static void SetWallpaper (Int32 val, string fileName)
         {
             SystemParametersInfo(val, 0, fileName, 0x01 | 0x02);
         }

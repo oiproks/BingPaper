@@ -2,7 +2,7 @@
 
 namespace BingPaper
 {
-    class Files
+    public class Files
     {
         public string url { get; set; }
         public string name { get; set; }
