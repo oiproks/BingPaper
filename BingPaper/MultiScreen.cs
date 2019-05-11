@@ -55,6 +55,7 @@ namespace BingPaper
                     Label description = (Label)control;
                     description.Text = files[descriptionIndex - 1].name;
                 }
+                control.Font = new Font(MainForm.pfc.Families[0], control.Font.Size);
             }
         }
         #endregion
@@ -68,7 +69,7 @@ namespace BingPaper
                 bitmap = CreateMultiScreenWall();
                 fileName = Utilities.PrepareFileName(DateTime.Today.ToString("YYYY-MM-DD"));
                 bitmap.Save(fileName, ImageFormat.Bmp);
-                Utilities.SetWallpaper(20, fileName);
+                Utilities.SetWallpaper(20, fileName, Utilities.Style.Tiled);
             }
             Array.Clear(wallList, 0, wallList.Length);
 
@@ -151,7 +152,8 @@ namespace BingPaper
         }
         private void HidePreview(object sender, EventArgs e)
         {
-            preview.Close();
+            if (preview != null)
+                preview.Close();
         }
         #endregion
 

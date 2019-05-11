@@ -129,6 +129,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\Raleway-Light.ttf" />
+    <None Include="Resources\Raleway-Medium.ttf" />
     <None Include="Resources\set_multi.png" />
     <None Include="Resources\me.png" />
     <None Include="Resources\set.png" />

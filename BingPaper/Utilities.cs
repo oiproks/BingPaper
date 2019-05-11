@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Win32;
+using System;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BingPaper
 {
@@ -12,6 +9,13 @@ namespace BingPaper
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+
+        public enum Style : int
+        {
+            Tiled,
+            Centered,
+            Stretched
+        }
 
         public static void CheckImagePath()
         {
@@ -41,8 +45,27 @@ namespace BingPaper
             return fileName;
         }
 
-        public static void SetWallpaper (Int32 val, string fileName)
+        public static void SetWallpaper (Int32 val, string fileName, Style style)
         {
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
+            if (style == Style.Stretched)
+            {
+                key.SetValue(@"WallpaperStyle", 2.ToString());
+                key.SetValue(@"TileWallpaper", 0.ToString());
+            }
+
+            if (style == Style.Centered)
+            {
+                key.SetValue(@"WallpaperStyle", 1.ToString());
+                key.SetValue(@"TileWallpaper", 0.ToString());
+            }
+
+            if (style == Style.Tiled)
+            {
+                key.SetValue(@"WallpaperStyle", 1.ToString());
+                key.SetValue(@"TileWallpaper", 1.ToString());
+            }
+
             SystemParametersInfo(val, 0, fileName, 0x01 | 0x02);
         }
     }

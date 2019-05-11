@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -23,6 +24,7 @@ namespace BingPaper
         Point lastLocation;
         MultiScreen multiScreen;
         Info info;
+        public static PrivateFontCollection pfc;
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
@@ -37,6 +39,9 @@ namespace BingPaper
             files = new List<Files>();
 
             Utilities.CheckImagePath();
+
+            InitFont(Properties.Resources.Raleway_Light);
+            InitFont(Properties.Resources.Raleway_Medium);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -62,6 +67,15 @@ namespace BingPaper
             control.Parent = pctBoxWall;
             control.Location = pos;
             control.BackColor = Color.Transparent;
+        }
+
+        private void InitFont(byte[] font)
+        {
+            pfc = new PrivateFontCollection();
+            int fontLength = font.Length;
+            IntPtr data = Marshal.AllocCoTaskMem(fontLength);
+            Marshal.Copy(font, 0, data, fontLength);
+            pfc.AddMemoryFont(data, fontLength);
         }
 
         private void Form1_Activated(object sender, EventArgs e)
@@ -173,7 +187,7 @@ namespace BingPaper
             fileName = Utilities.PrepareFileName(file_index);
             bitmap = (Bitmap)pctBoxWall.Image;
             bitmap.Save(fileName, ImageFormat.Bmp);
-            Utilities.SetWallpaper(0x0014, fileName);
+            Utilities.SetWallpaper(0x0014, fileName, Utilities.Style.Centered);
         }
 
         private void btnSetMultitWall_Click(object sender, EventArgs e)
