@@ -7,14 +7,12 @@ namespace BingPaper
 {
     class Utilities
     {
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
-
         public enum Style : int
         {
             Tiled,
             Centered,
-            Stretched
+            Stretched,
+            Fill
         }
 
         public static void CheckImagePath()
@@ -65,8 +63,13 @@ namespace BingPaper
                 key.SetValue(@"WallpaperStyle", 1.ToString());
                 key.SetValue(@"TileWallpaper", 1.ToString());
             }
+            if (style == Style.Fill)
+            {
+                key.SetValue(@"WallpaperStyle", 10.ToString());
+                key.SetValue(@"TileWallpaper", 0.ToString());
+            }
 
-            SystemParametersInfo(val, 0, fileName, 0x01 | 0x02);
+            NativeMethods.SystemParametersInfo(val, 0, fileName, 0x01 | 0x02);
         }
     }
 }

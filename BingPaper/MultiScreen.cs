@@ -10,13 +10,12 @@ namespace BingPaper
     public partial class MultiScreen : Form
     {
         private List<Files> files;
-        Bitmap[] wallList;
-        string fileName = string.Empty;
+        List<ScreenAndWallpaper> screenList;
+        string fileName = string.Empty, log = string.Empty;
         bool mouseDown = false;
         Point lastLocation;
-        int screenCount;
         Form main;
-        Preview preview;
+        Preview preview; 
 
         #region Preliminary Work
         public MultiScreen(Form main, List<Files> files)
@@ -25,8 +24,12 @@ namespace BingPaper
             this.files = files;
             this.main = main;
 
-            screenCount = Screen.AllScreens.Count();
-            wallList = new Bitmap[screenCount];
+            screenList = new List<ScreenAndWallpaper>();
+            foreach (Screen screen in Screen.AllScreens)
+            {
+                screenList.Add(new ScreenAndWallpaper(screen, new Files()));
+            }
+            screenList = screenList.OrderBy(x => x.screen.Bounds.X).ToList();
         }
 
         private void MultiScreen_Load(object sender, EventArgs e)
@@ -37,7 +40,7 @@ namespace BingPaper
                     foreach (RadioButton rb in control.Controls)
                     {
                         int.TryParse(rb.Text[rb.Text.Length - 1].ToString(), out int num);
-                        if (num > screenCount)
+                        if (num > screenList.Count)
                             rb.Visible = false;
                         else
                             rb.CheckedChanged += addWallToList;
@@ -64,14 +67,24 @@ namespace BingPaper
         private void btnApply_Click(object sender, EventArgs e)
         {
             Bitmap bitmap;
-            if (wallList.Count(x => x != null) == wallList.Length)
+            if (screenList.Count(x => x.image != null) == screenList.Count)
             {
                 bitmap = CreateMultiScreenWall();
-                fileName = Utilities.PrepareFileName(DateTime.Today.ToString("YYYY-MM-DD"));
+                fileName = Utilities.PrepareFileName(DateTime.Today.ToString("yyyy-MM-dd"));
                 bitmap.Save(fileName, ImageFormat.Bmp);
                 Utilities.SetWallpaper(20, fileName, Utilities.Style.Tiled);
             }
-            Array.Clear(wallList, 0, wallList.Length);
+
+            string log = @"Applying " + screenList.Count + " wallpapers:\r\n\t";
+            foreach (ScreenAndWallpaper saw in screenList)
+            {
+                log += @"Number " + (screenList.FindIndex(x => x == saw) + 1).ToString() + "\r\n\t"
+                    + "- Screen resolution: " + saw.screen.Bounds.Size.Width.ToString() + "x" + saw.screen.Bounds.Size.Height.ToString() + "\r\n\t"
+                    + "- Image resolution: " + saw.image.bitmap.Size.Width.ToString() + "x" + saw.image.bitmap.Size.Height.ToString() + "\r\n\t"
+                    + "- Image description: " + saw.image.name + "\r\n\t"
+                    + "- Image date: " + DateTime.ParseExact(saw.image.date, "yyyyMMdd", null).ToString("yyyy-MM-dd") + "\r\n\t";
+            }
+            Logger.WriteLog(log);
 
             btnClose_Click(sender, e);
         }
@@ -90,15 +103,15 @@ namespace BingPaper
                 int.TryParse(radio.Text[radio.Text.Length - 1].ToString(), out int screenIndex);
                 FlowLayoutPanel flp = radio.Parent as FlowLayoutPanel;
                 int.TryParse(flp.Name.Substring(7).ToString(), out int imageIndex);
-                Bitmap image = files[imageIndex - 1].bitmap;
-            
-                wallList[screenIndex - 1] = image;
+
+                screenList[screenIndex - 1].image = files[imageIndex - 1];
+                btnApply.Enabled = screenList.Count(x => x.image != null) == 2 ? true : false;
                 foreach (Control control in Controls)
                     if (control is FlowLayoutPanel && !control.Name.Equals(flp.Name))
                         foreach (RadioButton rb in control.Controls)
                         {
                             int.TryParse(rb.Text[rb.Text.Length - 1].ToString(), out int radioNum);
-                            radioNum %= screenCount;
+                            radioNum %= screenList.Count;
                             if (radioNum == screenIndex)
                                 rb.Checked = false;
                         }
@@ -114,10 +127,15 @@ namespace BingPaper
             {
                 int width = 0;
                 int height = 0;
-                foreach (Bitmap wall in wallList)
+                //foreach (Bitmap wall in wallList)
+                //{
+                //    width += wall.Width;
+                //    height = wall.Height > height ? wall.Height : height;
+                //}
+                foreach (ScreenAndWallpaper element in screenList)
                 {
-                    width += wall.Width;
-                    height = wall.Height > height ? wall.Height : height;
+                    width += element.screen.WorkingArea.Width;
+                    height = element.screen.WorkingArea.Height > height ? element.screen.WorkingArea.Height : height;
                 }
 
                 finalImage = new Bitmap(width, height);
@@ -125,11 +143,14 @@ namespace BingPaper
                 using (Graphics g = Graphics.FromImage(finalImage))
                 {
                     g.Clear(Color.Black);
-                    int offset = 0;
-                    foreach (Bitmap image in wallList)
+                    foreach (ScreenAndWallpaper element in screenList)
                     {
-                        g.DrawImage(image, new Rectangle(offset, 0, image.Width, image.Height));
-                        offset += image.Width;
+                        float ratioImage = (float)element.image.bitmap.Width / (float)element.image.bitmap.Height;
+                        float ratioScreen = (float)element.screen.WorkingArea.Width / (float)element.screen.WorkingArea.Height;
+                        if (ratioScreen > ratioImage)
+                            g.DrawImage(element.image.bitmap, new Rectangle(element.screen.Bounds.X, 0, element.image.bitmap.Width, height));
+                        else
+                            g.DrawImage(element.image.bitmap, new Rectangle(element.screen.Bounds.X, 0, (int)(element.screen.WorkingArea.Height * ratioImage), element.screen.WorkingArea.Height));
                     }
                 }
                 return finalImage;

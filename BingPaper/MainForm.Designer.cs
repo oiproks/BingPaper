@@ -168,7 +168,7 @@
             this.btnSetMulti.Visible = false;
             this.btnSetMulti.Click += new System.EventHandler(this.btnSetMultitWall_Click);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -185,10 +185,11 @@
             this.Controls.Add(this.pctBoxWall);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BingPaper";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Interface_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Interface_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Interface_MouseUp);

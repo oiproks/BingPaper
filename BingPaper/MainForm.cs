@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,39 +20,45 @@ namespace BingPaper
         private const string bing = "http://www.bing.com";
         private string fileName = string.Empty;
         private int file_index = 0;
-        private List<Files> files;
+        private static List<Files> files;
         bool mouseDown = false;
         Point lastLocation;
         MultiScreen multiScreen;
         Info info;
         public static PrivateFontCollection pfc;
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+        static Splash splash;
+        static PictureBox myPctBoxWall;
+        static Label mylblName;
 
         #region Preliminary Work
         public MainForm()
         {
             InitializeComponent();
 
-            Activated += Form1_Activated;
-
             files = new List<Files>();
+            mylblName = lblName;
+            myPctBoxWall = pctBoxWall;
+
+            Activated += Form1_Activated;
 
             Utilities.CheckImagePath();
 
             InitFont(Properties.Resources.Raleway_Light);
             InitFont(Properties.Resources.Raleway_Medium);
+
+            splash = new Splash();
+            Application.Run(splash);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
-            Logger.WriteLog("Looking for new wallpaper");
+            
+        }
 
-            DownloadJSON();
-
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
             elementOnPicture(btnSetWall);
-            elementOnPicture(btnSetMulti); 
+            elementOnPicture(btnSetMulti);
             elementOnPicture(bingPaper2);
 
             if (Screen.AllScreens.Count() > 1)
@@ -93,46 +100,49 @@ namespace BingPaper
         #endregion
 
         #region Bing Magic
-        private void DownloadJSON()
+        public static void DownloadJSON()
         {
-            string url = Properties.Resources.bing_json_url_1;
-            var json = new WebClient().DownloadString(url);
-            JObject objects = JObject.Parse(json);
-            ListBuilder(ref files, objects);
-
-            url = Properties.Resources.bing_json_url_2;
-            json = new WebClient().DownloadString(url);
-            objects = JObject.Parse(json);
-            ListBuilder(ref files, objects);
-
-            string firstDate = files.OrderByDescending(o => o.date).ToList()[0].date;
-
-            try
+            if (files.Count == 0)
             {
-                Parallel.ForEach(files, (file) =>
+                string url = Properties.Resources.bing_json_url_1;
+                var json = new WebClient().DownloadString(url);
+                JObject objects = JObject.Parse(json);
+                ListBuilder(ref files, objects);
+
+                url = Properties.Resources.bing_json_url_2;
+                json = new WebClient().DownloadString(url);
+                objects = JObject.Parse(json);
+                ListBuilder(ref files, objects);
+
+                string firstDate = files.OrderByDescending(o => o.date).ToList()[0].date;
+
+                try
                 {
-                    WebRequest request = WebRequest.Create(file.url);
-                    WebResponse response = request.GetResponse();
-                    Stream responseStream = response.GetResponseStream();
-                    file.bitmap = new Bitmap(responseStream);
-                    if (file.date.Equals(firstDate))
+                    Parallel.ForEach(files, (file) =>
                     {
-                        pctBoxWall.Image = file.bitmap;
-                        lblName.Text = file.name;
-                    }
-                });
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteLog(ex);
-            }
-            finally
-            {
+                        WebRequest request = WebRequest.Create(file.url);
+                        WebResponse response = request.GetResponse();
+                        Stream responseStream = response.GetResponseStream();
+                        file.bitmap = new Bitmap(responseStream);
+                        if (file.date.Equals(firstDate))
+                        {
+                            myPctBoxWall.Image = file.bitmap;
+                            mylblName.Text = file.name;
+                        }
+                    });
+                }
+                catch (Exception ex)
+                {
+                    Logger.WriteLog(ex);
+                }
                 files = files.OrderByDescending(o => o.date).ToList();
+                Logger.WriteLog("Downloaded " + files.Count.ToString() + " wallpapers.");
+
+                splash.Close();
             }
         }
 
-        private void ListBuilder(ref List<Files> files, JObject objects)
+        private static void ListBuilder(ref List<Files> files, JObject objects)
         {
             for (int x = 0; x < 7; x++)
             {
@@ -187,7 +197,15 @@ namespace BingPaper
             fileName = Utilities.PrepareFileName(file_index);
             bitmap = (Bitmap)pctBoxWall.Image;
             bitmap.Save(fileName, ImageFormat.Bmp);
-            Utilities.SetWallpaper(0x0014, fileName, Utilities.Style.Centered);
+
+            string log = @"Applying wallpaper:"
+                    + "\r\n\t- Image resolution: " + bitmap.Size.Width.ToString() + "x" + bitmap.Size.Height.ToString() + "\r\n\t"
+                    + "- Image description: " + lblName.Text + "\r\n\t"
+                    + "- Image date: " + DateTime.ParseExact(files.Find(x => x.bitmap == bitmap).date, "yyyyMMdd", null).ToString("yyyy-MM-dd");
+
+            Logger.WriteLog(log);
+
+            Utilities.SetWallpaper(0x0014, fileName, Utilities.Style.Fill);
         }
 
         private void btnSetMultitWall_Click(object sender, EventArgs e)

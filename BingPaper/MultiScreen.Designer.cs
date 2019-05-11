@@ -183,6 +183,7 @@
             // btnApply
             // 
             this.btnApply.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnApply.Enabled = false;
             this.btnApply.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnApply.FlatAppearance.MouseDownBackColor = System.Drawing.Color.SteelBlue;
             this.btnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
