@@ -198,7 +198,6 @@
   <ItemGroup>
     <Content Include="icon.ico" />
     <None Include="Resources\option.png" />
-    <None Include="Resources\cog_icon.png" />
     <Content Include="Resources\icon.png" />
     <None Include="Resources\Raleway-Light.ttf" />
     <None Include="Resources\Raleway-Medium.ttf" />
