@@ -61,7 +61,14 @@ namespace BingPaper
                         btnSetWall_Click(sender, e);
                     else
                         btnSetMultitWall_Click(sender, e);
-            } else
+            } 
+        }
+
+        private void MainForm_Activate(object sender, EventArgs e)
+        {
+            if (autostart)
+                Close();
+            else
             {
                 FormCollection fc = Application.OpenForms;
                 if (fc.Count > 1)
@@ -75,12 +82,6 @@ namespace BingPaper
                             options.Focus();
                     }
             }
-        }
-
-        private void MainForm_Activate(object sender, EventArgs e)
-        {
-            if (autostart)
-                Close();
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
