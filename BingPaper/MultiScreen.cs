@@ -60,6 +60,13 @@ namespace BingPaper
                 }
                 control.Font = new Font(MainForm.pfc.Families[0], control.Font.Size);
             }
+
+            if (MainForm.autostart)
+            {
+                for (int x = 0; x < screenList.Count; x++)
+                    screenList[x].image = files[x];
+                btnApply_Click(sender, e);
+            }
         }
         #endregion
 

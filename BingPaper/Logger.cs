@@ -38,5 +38,22 @@ namespace BingPaper
             {
             }
         }
+
+        public static void WriteLog(string[] message)
+        {
+            StreamWriter sw = null;
+            try
+            {
+                sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "\\Log.txt", true);
+                sw.WriteLine(DateTime.Now.ToString() + ": ");
+                foreach (string text in message)
+                    sw.WriteLine("\t" + text);
+                sw.Flush();
+                sw.Close();
+            }
+            catch
+            {
+            }
+        }
     }
 }

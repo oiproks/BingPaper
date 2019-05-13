@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using BingPaper.Properties;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,7 +10,6 @@ using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -24,11 +24,13 @@ namespace BingPaper
         bool mouseDown = false;
         Point lastLocation;
         MultiScreen multiScreen;
+        Options options;
         Info info;
         public static PrivateFontCollection pfc;
         static Splash splash;
         static PictureBox myPctBoxWall;
         static Label mylblName;
+        public static bool autostart = false;
 
         #region Preliminary Work
         public MainForm()
@@ -39,12 +41,10 @@ namespace BingPaper
             mylblName = lblName;
             myPctBoxWall = pctBoxWall;
 
-            Activated += Form1_Activated;
-
             Utilities.CheckImagePath();
 
-            InitFont(Properties.Resources.Raleway_Light);
-            InitFont(Properties.Resources.Raleway_Medium);
+            InitFont(Resources.Raleway_Light);
+            InitFont(Resources.Raleway_Medium);
 
             splash = new Splash();
             Application.Run(splash);
@@ -52,7 +52,35 @@ namespace BingPaper
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
+            if (WindowState == FormWindowState.Minimized)
+            {
+                autostart = true;
+                if (Settings.Default.AUTOSTART)
+                    Logger.WriteLog("Applying Wallpaper from Start-Up.");
+                    if (!Settings.Default.MULTI)
+                        btnSetWall_Click(sender, e);
+                    else
+                        btnSetMultitWall_Click(sender, e);
+            } else
+            {
+                FormCollection fc = Application.OpenForms;
+                if (fc.Count > 1)
+                    foreach (Form frm in fc)
+                    {
+                        if (frm.Name.Equals("MultiScreen"))
+                            multiScreen.Focus();
+                        if (frm.Name.Equals("Info"))
+                            info.Focus();
+                        if (frm.Name.Equals("Options"))
+                            options.Focus();
+                    }
+            }
+        }
+
+        private void MainForm_Activate(object sender, EventArgs e)
+        {
+            if (autostart)
+                Close();
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -83,19 +111,6 @@ namespace BingPaper
             IntPtr data = Marshal.AllocCoTaskMem(fontLength);
             Marshal.Copy(font, 0, data, fontLength);
             pfc.AddMemoryFont(data, fontLength);
-        }
-
-        private void Form1_Activated(object sender, EventArgs e)
-        {
-            FormCollection fc = Application.OpenForms;
-            if (fc.Count > 1)
-                foreach (Form frm in fc)
-                {
-                    if (frm.Name.Equals("MultiScreen"))
-                        multiScreen.Focus();
-                    if (frm.Name.Equals("Info"))
-                        info.Focus();
-                }
         }
         #endregion
 
@@ -206,12 +221,22 @@ namespace BingPaper
             Logger.WriteLog(log);
 
             Utilities.SetWallpaper(0x0014, fileName, Utilities.Style.Fill);
+
+            if (autostart)
+                btnClose_Click(sender, e);
+
         }
 
         private void btnSetMultitWall_Click(object sender, EventArgs e)
         {
             multiScreen = new MultiScreen(this, files);
             multiScreen.Show();
+        }
+
+        private void btnOption_Click(object sender, EventArgs e)
+        {
+            options = new Options(this, Screen.AllScreens.Count());
+            options.Show();
         }
 
         private void btnMin_Click(object sender, EventArgs e)
