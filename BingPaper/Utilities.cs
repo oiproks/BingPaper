@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace BingPaper
@@ -31,15 +32,28 @@ namespace BingPaper
             }
         }
 
-        public static string PrepareFileName(int fileIndex)
+        public static string PrepareFileName(bool single, string imageName = "multi")
         {
-            string fileName = AppDomain.CurrentDomain.BaseDirectory + "Images" + "\\wallpaper_" + fileIndex + ".bmp";
-            return fileName;
-        }
+            string fileName = Path.Combine(Environment.CurrentDirectory, "Images") + "\\";
+            if (single)
+            {
+                string nameCode = string.Empty;
+                for (int x = 0; x < imageName.Length;)
+                {
+                    nameCode += imageName[x];
+                    x += 4;
+                }
+                string[] files = Directory.GetFiles(Path.Combine(Environment.CurrentDirectory, "Images")).ToArray();
+                foreach (string file in files)
+                    if (file.Contains(nameCode))
+                        File.Delete(file);
 
-        public static string PrepareFileName(string multi)
-        {
-            string fileName = AppDomain.CurrentDomain.BaseDirectory + "Images" + "\\wallpaper_" + multi + ".bmp";
+                fileName += DateTime.Now.ToString("yy_MM_dd") + " - " + nameCode + ".bmp";
+            }
+            else
+            {
+                fileName += "wallpaper_" + imageName + ".bmp";
+            }
             return fileName;
         }
 

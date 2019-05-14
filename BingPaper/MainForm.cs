@@ -213,7 +213,7 @@ namespace BingPaper
         private void btnSetWall_Click(object sender, EventArgs e)
         {
             Bitmap bitmap;
-            fileName = Utilities.PrepareFileName(file_index);
+            fileName = Utilities.PrepareFileName(true, lblName.Text);
             bitmap = (Bitmap)pctBoxWall.Image;
             bitmap.Save(fileName, ImageFormat.Bmp);
 

@@ -77,7 +77,7 @@ namespace BingPaper
             if (screenList.Count(x => x.image != null) == screenList.Count)
             {
                 bitmap = CreateMultiScreenWall();
-                fileName = Utilities.PrepareFileName(DateTime.Today.ToString("yyyy-MM-dd HH;mm;ss"));
+                fileName = Utilities.PrepareFileName(false);
                 bitmap.Save(fileName, ImageFormat.Bmp);
                 Utilities.SetWallpaper(20, fileName, Utilities.Style.Tiled);
             }
