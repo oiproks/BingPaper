@@ -25,6 +25,9 @@ namespace BingPaper
         private void Options_Load(object sender, EventArgs e)
         {
             chkStartUp.Checked = Properties.Settings.Default.AUTOSTART;
+
+            foreach (Control control in Controls)
+                control.Font = new Font(MainForm.pfc.Families[0], control.Font.Size);
         }
 
         private void ChkStartUp_CheckedChanged(object sender, EventArgs e)

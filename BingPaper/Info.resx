@@ -117,4 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblBing.Text" xml:space="preserve">
+    <value>Thanks for using BingPaper.
+I hope you enjoyed this little app I developed during my freetime.
+Feel free to contact me on the aftermentioned socials for suggestions.
+Like all the developers I'm coffeine addicted. 
+If you feel like it, you can support me buying me a coffee :D</value>
+  </data>
 </root>

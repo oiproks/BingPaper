@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BingPaper
@@ -24,7 +18,11 @@ namespace BingPaper
 
         private void Info_OnLoad(object sender, EventArgs e)
         {
+            foreach (Control control in Controls)
+                control.Font = new Font(MainForm.pfc.Families[0], control.Font.Size);
+
             //TODO: organise the link, scrolling text, etc...
+            //paypal.me/oiproks
         }
 
         #region Form Commands
