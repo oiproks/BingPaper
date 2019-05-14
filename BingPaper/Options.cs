@@ -1,6 +1,8 @@
 ﻿using Microsoft.Win32;
+using Microsoft.Win32.TaskScheduler;
 using System;
 using System.Drawing;
+using System.Security.Principal;
 using System.Windows.Forms;
 
 namespace BingPaper
@@ -41,19 +43,54 @@ namespace BingPaper
 
         private void SetStartup(object sender, EventArgs e)
         {
-            RegistryKey rk = Registry.CurrentUser.OpenSubKey
-                ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-
             if (chkStartUp.Checked)
-                rk.SetValue("BingPaper /minimized", Application.ExecutablePath + " --start-minimized");
+                SetScheduler("BingPaper");
             else
-                rk.DeleteValue("BingPaper", false);
-
+                GetAndDeleteTask("BingPaper");
             Properties.Settings.Default.AUTOSTART = chkStartUp.Checked;
             Properties.Settings.Default.MULTI = rbMulti.Checked;
             Properties.Settings.Default.Save();
 
             btnClose_Click(sender, e);
+        }
+
+        private void SetScheduler(string taskName)
+        {
+            using (TaskService ts = new TaskService())
+            {
+                TaskDefinition td = ts.NewTask();
+                td.RegistrationInfo.Description = "Sets a new wallpaper every day.";
+
+                LogonTrigger lTrigger = td.Triggers.Add(new LogonTrigger());
+                lTrigger.Delay = TimeSpan.FromSeconds(20);
+
+                td.Actions.Add(new ExecAction(Application.ExecutablePath, "--start-minimized", null));
+
+                td.Settings.RunOnlyIfNetworkAvailable = true;
+                td.Settings.Enabled = true;
+                td.Settings.StartWhenAvailable = true;
+                td.Settings.DisallowStartIfOnBatteries = false;
+
+                td.Principal.RunLevel = TaskRunLevel.Highest;
+
+                ts.RootFolder.RegisterTaskDefinition(taskName, td);
+            }
+        }
+
+        void GetAndDeleteTask(string taskName)
+        {
+            using (TaskService ts = new TaskService())
+            {
+                Task td = ts.GetTask(taskName);
+
+                var identity = WindowsIdentity.GetCurrent();
+                var principal = new WindowsPrincipal(identity);
+                if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
+                    throw new Exception($"Cannot delete task with your current identity '{identity.Name}' permissions level." +
+                    "You likely need to run this application 'as administrator' even if you are using an administrator account.");
+
+                ts.RootFolder.DeleteTask(taskName);
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)

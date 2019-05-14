@@ -33,9 +33,12 @@ namespace BingPaper
         public static bool autostart = false;
 
         #region Preliminary Work
-        public MainForm()
+        public MainForm(string[] args)
         {
             InitializeComponent();
+
+            if (args.Length > 0 && args[0].Equals("--start-minimized"))
+                WindowState = FormWindowState.Minimized;
 
             files = new List<Files>();
             mylblName = lblName;
