@@ -177,7 +177,6 @@ namespace BingPaper
         #region Buttons
         private void btnRight_Click(object sender, EventArgs e)
         {
-            //int index = fileBitmaps.IndexOf((Bitmap)pctBoxWall.Image);
             int index = files.FindIndex(f => f.bitmap == (Bitmap)pctBoxWall.Image);
             if (index < files.Count - 1)
             {
