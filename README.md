@@ -13,7 +13,7 @@ See the latest Bing daily photos and use them as your wallpaper.
 
 ## Download BingPaper
 
-The application is available for download from [HERE](BingPaper.exe) _link is gonna be active soon_
+The application is available for download from [HERE](/BingPaper.exe) _link is gonna be active soon_
 
 ## Screenshots
 ![Screenshots](/Images/bingpaper_new.png)
