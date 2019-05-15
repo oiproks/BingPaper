@@ -44,17 +44,11 @@ namespace BingPaper
             }
         }
 
-        private void SetStartup(object sender, EventArgs e)
-        {
+        private void CheckScheduler() {
             if (chkStartUp.Checked)
                 SetScheduler("BingPaper");
             else
                 GetAndDeleteTask("BingPaper");
-            Properties.Settings.Default.AUTOSTART = chkStartUp.Checked;
-            Properties.Settings.Default.MULTI = rbMulti.Checked;
-            Properties.Settings.Default.Save();
-
-            btnClose_Click(sender, e);
         }
 
         private void SetScheduler(string taskName)
@@ -96,6 +90,16 @@ namespace BingPaper
             }
         }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            CheckScheduler();
+
+            Properties.Settings.Default.AUTOSTART = chkStartUp.Checked;
+            Properties.Settings.Default.MULTI = rbMulti.Checked;
+            Properties.Settings.Default.Save();
+
+            btnClose_Click(sender, e);
+        }
         private void btnClose_Click(object sender, EventArgs e)
         {
             main.Focus();

@@ -195,18 +195,9 @@ namespace BingPaper
         private void btnLeft_Click(object sender, EventArgs e)
         {
             int index = files.FindIndex(f => f.bitmap == (Bitmap)pctBoxWall.Image);
-            if (index > 0)
-            {
-                file_index = index - 1;
-                pctBoxWall.Image = files[file_index].bitmap;
-                lblName.Text = files[file_index].name;
-            }
-            else
-            {
-                file_index = files.Count() - 1;
-                pctBoxWall.Image = files[file_index].bitmap;
-                lblName.Text = files[file_index].name;
-            }
+            file_index = index > 0 ? index - 1 : files.Count() - 1;
+            pctBoxWall.Image = files[file_index].bitmap;
+            lblName.Text = files[file_index].name;
         }
         
         private void btnSetWall_Click(object sender, EventArgs e)

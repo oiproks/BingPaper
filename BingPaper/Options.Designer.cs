@@ -45,7 +45,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.btnCancel.ForeColor = System.Drawing.Color.DimGray;
-            this.btnCancel.Location = new System.Drawing.Point(313, 122);
+            this.btnCancel.Location = new System.Drawing.Point(313, 125);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 17;
@@ -64,7 +64,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.btnSave.ForeColor = System.Drawing.Color.DimGray;
-            this.btnSave.Location = new System.Drawing.Point(220, 122);
+            this.btnSave.Location = new System.Drawing.Point(220, 125);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 16;
@@ -72,7 +72,7 @@
             this.btnSave.Text = "Save";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.SetStartup);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // chkStartUp
             // 
@@ -91,7 +91,7 @@
             // 
             this.rbSingle.AutoSize = true;
             this.rbSingle.Enabled = false;
-            this.rbSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbSingle.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.rbSingle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.rbSingle.ForeColor = System.Drawing.SystemColors.Control;
             this.rbSingle.Location = new System.Drawing.Point(39, 52);
@@ -106,7 +106,7 @@
             // 
             this.rbMulti.AutoSize = true;
             this.rbMulti.Enabled = false;
-            this.rbMulti.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbMulti.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.rbMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.rbMulti.ForeColor = System.Drawing.SystemColors.Control;
             this.rbMulti.Location = new System.Drawing.Point(39, 77);
