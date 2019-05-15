@@ -201,12 +201,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\twitter1.png" />
+    <None Include="Resources\instagram1.png" />
     <None Include="Resources\paypal.png" />
     <None Include="Resources\twitter.png" />
     <None Include="Resources\instagram.png" />
     <None Include="Resources\option.png" />
     <None Include="Resources\github.png" />
     <None Include="Resources\bingpaper.png" />
+    <None Include="Resources\github1.png" />
+    <None Include="Resources\coffee.png" />
     <Content Include="Resources\icon.png" />
     <None Include="Resources\Raleway-Light.ttf" />
     <None Include="Resources\Raleway-Medium.ttf" />

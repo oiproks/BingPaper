@@ -212,9 +212,9 @@ namespace BingPaper
         private void btnSetWall_Click(object sender, EventArgs e)
         {
             Bitmap bitmap;
-            fileName = Utilities.PrepareFileName(true, lblName.Text);
             bitmap = (Bitmap)pctBoxWall.Image;
-            bitmap.Save(fileName, ImageFormat.Bmp);
+            int index = files.FindIndex(f => f.bitmap == (Bitmap)pctBoxWall.Image);
+            fileName = Utilities.PrepareFileName(true, bitmap, lblName.Text, files[index].date);
 
             string log = @"Applying wallpaper:"
                     + "\r\n\t- Image resolution: " + bitmap.Size.Width.ToString() + "x" + bitmap.Size.Height.ToString() + "\r\n\t"

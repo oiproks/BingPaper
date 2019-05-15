@@ -30,17 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Info));
             this.btnClose = new System.Windows.Forms.Button();
-            this.pbInsta = new System.Windows.Forms.PictureBox();
-            this.pbGit = new System.Windows.Forms.PictureBox();
-            this.pbTwitter = new System.Windows.Forms.PictureBox();
-            this.pbPay = new System.Windows.Forms.PictureBox();
             this.pbBing = new System.Windows.Forms.PictureBox();
             this.lblBing = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pbInsta)).BeginInit();
+            this.pbGit = new System.Windows.Forms.PictureBox();
+            this.pbTwitter = new System.Windows.Forms.PictureBox();
+            this.pbInsta = new System.Windows.Forms.PictureBox();
+            this.pbCoffee = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbGit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTwitter)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbBing)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbInsta)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCoffee)).BeginInit();
             this.SuspendLayout();
             // 
             // btnClose
@@ -58,50 +58,6 @@
             this.btnClose.Tag = "close";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // pbInsta
-            // 
-            this.pbInsta.BackColor = System.Drawing.Color.Transparent;
-            this.pbInsta.Image = global::BingPaper.Properties.Resources.instagram;
-            this.pbInsta.Location = new System.Drawing.Point(42, 116);
-            this.pbInsta.Name = "pbInsta";
-            this.pbInsta.Size = new System.Drawing.Size(48, 48);
-            this.pbInsta.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbInsta.TabIndex = 17;
-            this.pbInsta.TabStop = false;
-            // 
-            // pbGit
-            // 
-            this.pbGit.BackColor = System.Drawing.Color.Transparent;
-            this.pbGit.Image = global::BingPaper.Properties.Resources.github;
-            this.pbGit.Location = new System.Drawing.Point(42, 192);
-            this.pbGit.Name = "pbGit";
-            this.pbGit.Size = new System.Drawing.Size(48, 48);
-            this.pbGit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbGit.TabIndex = 19;
-            this.pbGit.TabStop = false;
-            // 
-            // pbTwitter
-            // 
-            this.pbTwitter.BackColor = System.Drawing.Color.Transparent;
-            this.pbTwitter.Image = global::BingPaper.Properties.Resources.twitter;
-            this.pbTwitter.Location = new System.Drawing.Point(400, 116);
-            this.pbTwitter.Name = "pbTwitter";
-            this.pbTwitter.Size = new System.Drawing.Size(48, 48);
-            this.pbTwitter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbTwitter.TabIndex = 18;
-            this.pbTwitter.TabStop = false;
-            // 
-            // pbPay
-            // 
-            this.pbPay.BackColor = System.Drawing.Color.Transparent;
-            this.pbPay.Image = global::BingPaper.Properties.Resources.paypal;
-            this.pbPay.Location = new System.Drawing.Point(400, 192);
-            this.pbPay.Name = "pbPay";
-            this.pbPay.Size = new System.Drawing.Size(48, 48);
-            this.pbPay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbPay.TabIndex = 21;
-            this.pbPay.TabStop = false;
             // 
             // pbBing
             // 
@@ -124,10 +80,58 @@
             this.lblBing.MaximumSize = new System.Drawing.Size(360, 80);
             this.lblBing.MinimumSize = new System.Drawing.Size(35, 13);
             this.lblBing.Name = "lblBing";
-            this.lblBing.Size = new System.Drawing.Size(347, 80);
+            this.lblBing.Size = new System.Drawing.Size(334, 80);
             this.lblBing.TabIndex = 23;
             this.lblBing.Text = resources.GetString("lblBing.Text");
             this.lblBing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pbGit
+            // 
+            this.pbGit.BackColor = System.Drawing.Color.Transparent;
+            this.pbGit.Image = global::BingPaper.Properties.Resources.github1;
+            this.pbGit.Location = new System.Drawing.Point(228, 164);
+            this.pbGit.Name = "pbGit";
+            this.pbGit.Size = new System.Drawing.Size(141, 40);
+            this.pbGit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbGit.TabIndex = 19;
+            this.pbGit.TabStop = false;
+            this.pbGit.Click += new System.EventHandler(this.Images_Click);
+            // 
+            // pbTwitter
+            // 
+            this.pbTwitter.BackColor = System.Drawing.Color.Transparent;
+            this.pbTwitter.Image = global::BingPaper.Properties.Resources.twitter1;
+            this.pbTwitter.Location = new System.Drawing.Point(40, 199);
+            this.pbTwitter.Name = "pbTwitter";
+            this.pbTwitter.Size = new System.Drawing.Size(180, 25);
+            this.pbTwitter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbTwitter.TabIndex = 18;
+            this.pbTwitter.TabStop = false;
+            this.pbTwitter.Click += new System.EventHandler(this.Images_Click);
+            // 
+            // pbInsta
+            // 
+            this.pbInsta.BackColor = System.Drawing.Color.Transparent;
+            this.pbInsta.Image = global::BingPaper.Properties.Resources.instagram1;
+            this.pbInsta.Location = new System.Drawing.Point(40, 132);
+            this.pbInsta.Name = "pbInsta";
+            this.pbInsta.Size = new System.Drawing.Size(180, 40);
+            this.pbInsta.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbInsta.TabIndex = 17;
+            this.pbInsta.TabStop = false;
+            this.pbInsta.Click += new System.EventHandler(this.Images_Click);
+            // 
+            // pbCoffee
+            // 
+            this.pbCoffee.BackColor = System.Drawing.Color.Transparent;
+            this.pbCoffee.Image = global::BingPaper.Properties.Resources.coffee;
+            this.pbCoffee.Location = new System.Drawing.Point(380, 132);
+            this.pbCoffee.Name = "pbCoffee";
+            this.pbCoffee.Size = new System.Drawing.Size(80, 95);
+            this.pbCoffee.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbCoffee.TabIndex = 24;
+            this.pbCoffee.TabStop = false;
+            this.pbCoffee.Click += new System.EventHandler(this.Images_Click);
             // 
             // Info
             // 
@@ -135,9 +139,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(500, 250);
+            this.Controls.Add(this.pbCoffee);
             this.Controls.Add(this.lblBing);
             this.Controls.Add(this.pbBing);
-            this.Controls.Add(this.pbPay);
             this.Controls.Add(this.pbGit);
             this.Controls.Add(this.pbTwitter);
             this.Controls.Add(this.pbInsta);
@@ -157,11 +161,11 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Interface_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Interface_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Interface_MouseUp);
-            ((System.ComponentModel.ISupportInitialize)(this.pbInsta)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbGit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTwitter)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbBing)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbInsta)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCoffee)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,11 +174,11 @@
         #endregion
 
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.PictureBox pbInsta;
-        private System.Windows.Forms.PictureBox pbGit;
-        private System.Windows.Forms.PictureBox pbTwitter;
-        private System.Windows.Forms.PictureBox pbPay;
         private System.Windows.Forms.PictureBox pbBing;
         private System.Windows.Forms.Label lblBing;
+        private System.Windows.Forms.PictureBox pbGit;
+        private System.Windows.Forms.PictureBox pbTwitter;
+        private System.Windows.Forms.PictureBox pbInsta;
+        private System.Windows.Forms.PictureBox pbCoffee;
     }
 }

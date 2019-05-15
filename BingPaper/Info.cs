@@ -25,6 +25,27 @@ namespace BingPaper
             //paypal.me/oiproks
         }
 
+        private void Images_Click(object sender, EventArgs e)
+        {
+            Control control = (Control)sender;
+
+            switch (control.Name)
+            {
+                case "pbInsta":
+                    System.Diagnostics.Process.Start("https://www.instagram.com/oiproks.nemo/");
+                    break;
+                case "pbGit":
+                    System.Diagnostics.Process.Start("https://github.com/oiproks/");
+                    break;
+                case "pbTwitter":
+                    System.Diagnostics.Process.Start("https://twitter.com/oiproks");
+                    break;
+                case "pbCoffee":
+                    System.Diagnostics.Process.Start("https://www.paypal.me/oiproks");
+                    break;
+            }
+        }
+
         #region Form Commands
         private void btnClose_Click(object sender, EventArgs e)
         {

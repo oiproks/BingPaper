@@ -1,5 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -32,7 +34,7 @@ namespace BingPaper
             }
         }
 
-        public static string PrepareFileName(bool single, string imageName = "multi")
+        public static string PrepareFileName(bool single, Bitmap bitmap, string imageName = "multi", string date = "")
         {
             string fileName = Path.Combine(Environment.CurrentDirectory, "Images") + "\\";
             if (single)
@@ -47,13 +49,15 @@ namespace BingPaper
                 foreach (string file in files)
                     if (file.Contains(nameCode))
                         File.Delete(file);
-
-                fileName += DateTime.Now.ToString("yy_MM_dd") + " - " + nameCode + ".bmp";
+                DateTime oDate = DateTime.ParseExact(date, "yyyyMMdd", null);
+                date = date == "" ? DateTime.Now.ToString("yy_MM_dd") : oDate.ToString("yy_MM_dd");
+                fileName += date + " - " + nameCode + ".bmp";
             }
             else
             {
                 fileName += "wallpaper_" + imageName + ".bmp";
             }
+            bitmap.Save(fileName, ImageFormat.Bmp);
             return fileName;
         }
 
