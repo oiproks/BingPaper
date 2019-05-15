@@ -80,7 +80,7 @@
             this.lblBing.MaximumSize = new System.Drawing.Size(360, 80);
             this.lblBing.MinimumSize = new System.Drawing.Size(35, 13);
             this.lblBing.Name = "lblBing";
-            this.lblBing.Size = new System.Drawing.Size(334, 80);
+            this.lblBing.Size = new System.Drawing.Size(347, 80);
             this.lblBing.TabIndex = 23;
             this.lblBing.Text = resources.GetString("lblBing.Text");
             this.lblBing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -88,6 +88,7 @@
             // pbGit
             // 
             this.pbGit.BackColor = System.Drawing.Color.Transparent;
+            this.pbGit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbGit.Image = global::BingPaper.Properties.Resources.github1;
             this.pbGit.Location = new System.Drawing.Point(228, 164);
             this.pbGit.Name = "pbGit";
@@ -100,6 +101,7 @@
             // pbTwitter
             // 
             this.pbTwitter.BackColor = System.Drawing.Color.Transparent;
+            this.pbTwitter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbTwitter.Image = global::BingPaper.Properties.Resources.twitter1;
             this.pbTwitter.Location = new System.Drawing.Point(40, 199);
             this.pbTwitter.Name = "pbTwitter";
@@ -112,6 +114,7 @@
             // pbInsta
             // 
             this.pbInsta.BackColor = System.Drawing.Color.Transparent;
+            this.pbInsta.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbInsta.Image = global::BingPaper.Properties.Resources.instagram1;
             this.pbInsta.Location = new System.Drawing.Point(40, 132);
             this.pbInsta.Name = "pbInsta";
@@ -124,6 +127,7 @@
             // pbCoffee
             // 
             this.pbCoffee.BackColor = System.Drawing.Color.Transparent;
+            this.pbCoffee.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbCoffee.Image = global::BingPaper.Properties.Resources.coffee;
             this.pbCoffee.Location = new System.Drawing.Point(380, 132);
             this.pbCoffee.Name = "pbCoffee";
