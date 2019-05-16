@@ -22,10 +22,12 @@ namespace BingPaper
         private int file_index = 0;
         private static List<Files> files;
         bool mouseDown = false;
+        public static bool internet = false;
         Point lastLocation;
         MultiScreen multiScreen;
         Options options;
         Info info;
+        LoadPast loadPast;
         public static PrivateFontCollection pfc;
         static Splash splash;
         static PictureBox myPctBoxWall;
@@ -51,6 +53,8 @@ namespace BingPaper
 
             splash = new Splash();
             Application.Run(splash);
+            if (!internet)
+                Close();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -83,6 +87,8 @@ namespace BingPaper
                             info.Focus();
                         if (frm.Name.Equals("Options"))
                             options.Focus();
+                        if (frm.Name.Equals("LoadPast"))
+                            loadPast.Focus();
                     }
             }
         }
@@ -123,40 +129,50 @@ namespace BingPaper
         {
             if (files.Count == 0)
             {
-                string url = Properties.Resources.bing_json_url_1;
-                var json = new WebClient().DownloadString(url);
-                JObject objects = JObject.Parse(json);
-                ListBuilder(ref files, objects);
-
-                url = Properties.Resources.bing_json_url_2;
-                json = new WebClient().DownloadString(url);
-                objects = JObject.Parse(json);
-                ListBuilder(ref files, objects);
-
-                string firstDate = files.OrderByDescending(o => o.date).ToList()[0].date;
-
+                string url = Resources.bing_json_url_1;
+                var json = string.Empty;
                 try
                 {
-                    Parallel.ForEach(files, (file) =>
-                    {
-                        WebRequest request = WebRequest.Create(file.url);
-                        WebResponse response = request.GetResponse();
-                        Stream responseStream = response.GetResponseStream();
-                        file.bitmap = new Bitmap(responseStream);
-                        if (file.date.Equals(firstDate))
-                        {
-                            myPctBoxWall.Image = file.bitmap;
-                            mylblName.Text = file.name;
-                        }
-                    });
-                }
-                catch (Exception ex)
-                {
-                    Logger.WriteLog("MainForm", ex);
-                }
-                files = files.OrderByDescending(o => o.date).ToList();
-                Logger.WriteLog("Downloaded " + files.Count.ToString() + " wallpapers.");
+                    json = new WebClient().DownloadString(url);
+                    internet = true;
+                    Logger.WriteLog("Searching new wallpapers");
+                    JObject objects = JObject.Parse(json);
+                    ListBuilder(ref files, objects);
 
+                    url = Properties.Resources.bing_json_url_2;
+                    json = new WebClient().DownloadString(url);
+                    objects = JObject.Parse(json);
+                    ListBuilder(ref files, objects);
+
+                    string firstDate = files.OrderByDescending(o => o.date).ToList()[0].date;
+
+                    try
+                    {
+                        Parallel.ForEach(files, (file) =>
+                        {
+                            WebRequest request = WebRequest.Create(file.url);
+                            WebResponse response = request.GetResponse();
+                            Stream responseStream = response.GetResponseStream();
+                            file.bitmap = new Bitmap(responseStream);
+                            if (file.date.Equals(firstDate))
+                            {
+                                myPctBoxWall.Image = file.bitmap;
+                                mylblName.Text = file.name;
+                            }
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.WriteLog("MainForm", ex);
+                        internet = false;
+                    }
+                    files = files.OrderByDescending(o => o.date).ToList();
+                    Logger.WriteLog("Downloaded " + files.Count.ToString() + " wallpapers.");
+                }
+                catch (WebException ex)
+                {
+                    Logger.WriteLog("Connection", ex);
+                }
                 splash.Close();
             }
         }
@@ -225,6 +241,12 @@ namespace BingPaper
         {
             multiScreen = new MultiScreen(this, files);
             multiScreen.Show();
+        }
+
+        private void btnLoadPast(object sender, EventArgs e)
+        {
+            loadPast = new LoadPast(this);
+            loadPast.Show();
         }
 
         private void btnOption_Click(object sender, EventArgs e)

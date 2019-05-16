@@ -11,7 +11,7 @@ namespace BingPaper
     {
         private List<Files> files;
         List<ScreenAndWallpaper> screenList;
-        string fileName = string.Empty, log = string.Empty;
+        string log = string.Empty;
         bool mouseDown = false;
         Point lastLocation;
         Form main;
@@ -44,6 +44,7 @@ namespace BingPaper
                             rb.Visible = false;
                         else
                             rb.CheckedChanged += addWallToList;
+                        rb.Font = new Font(MainForm.pfc.Families[0], rb.Font.Size);
                     }
                 if (control is PictureBox && control.Visible)
                 {
@@ -76,8 +77,8 @@ namespace BingPaper
             Bitmap bitmap;
             if (screenList.Count(x => x.image != null) == screenList.Count)
             {
-                bitmap = CreateMultiScreenWall();
-                fileName = Utilities.PrepareFileName(false, bitmap);
+                bitmap = Utilities.CreateMultiScreenWall(Name, screenList);
+                string fileName = Utilities.PrepareFileName(false, bitmap);
                 Utilities.SetWallpaper(20, fileName, Utilities.Style.Tiled);
             }
 
@@ -126,44 +127,44 @@ namespace BingPaper
         #endregion
 
         #region Some Drawing Work
-        private Bitmap CreateMultiScreenWall()
-        {
-            Bitmap finalImage = null;
-            try
-            {
-                int width = 0;
-                int height = 0;
-                foreach (ScreenAndWallpaper element in screenList)
-                {
-                    width += element.screen.WorkingArea.Width;
-                    height = element.screen.WorkingArea.Height > height ? element.screen.WorkingArea.Height : height;
-                }
+        //private Bitmap CreateMultiScreenWall()
+        //{
+        //    Bitmap finalImage = null;
+        //    try
+        //    {
+        //        int width = 0;
+        //        int height = 0;
+        //        foreach (ScreenAndWallpaper element in screenList)
+        //        {
+        //            width += element.screen.WorkingArea.Width;
+        //            height = element.screen.WorkingArea.Height > height ? element.screen.WorkingArea.Height : height;
+        //        }
 
-                finalImage = new Bitmap(width, height);
+        //        finalImage = new Bitmap(width, height);
 
-                using (Graphics g = Graphics.FromImage(finalImage))
-                {
-                    g.Clear(Color.Black);
-                    foreach (ScreenAndWallpaper element in screenList)
-                    {
-                        Utilities.PrepareFileName(true, element.image.bitmap, element.image.name, element.image.date);
-                        float ratioImage = (float)element.image.bitmap.Width / (float)element.image.bitmap.Height;
-                        float ratioScreen = (float)element.screen.WorkingArea.Width / (float)element.screen.WorkingArea.Height;
-                        if (ratioScreen > ratioImage)
-                            g.DrawImage(element.image.bitmap, new Rectangle(element.screen.Bounds.X, 0, element.image.bitmap.Width, height));
-                        else
-                            g.DrawImage(element.image.bitmap, new Rectangle(element.screen.Bounds.X, 0, (int)(element.screen.WorkingArea.Height * ratioImage), element.screen.WorkingArea.Height));
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                if (finalImage != null)
-                    finalImage.Dispose();
-                Logger.WriteLog(Name, ex);
-            }
-            return finalImage;
-        }
+        //        using (Graphics g = Graphics.FromImage(finalImage))
+        //        {
+        //            g.Clear(Color.Black);
+        //            foreach (ScreenAndWallpaper element in screenList)
+        //            {
+        //                Utilities.PrepareFileName(true, element.image.bitmap, element.image.name, element.image.date);
+        //                float ratioImage = (float)element.image.bitmap.Width / (float)element.image.bitmap.Height;
+        //                float ratioScreen = (float)element.screen.WorkingArea.Width / (float)element.screen.WorkingArea.Height;
+        //                if (ratioScreen > ratioImage)
+        //                    g.DrawImage(element.image.bitmap, new Rectangle(element.screen.Bounds.X, 0, element.image.bitmap.Width, height));
+        //                else
+        //                    g.DrawImage(element.image.bitmap, new Rectangle(element.screen.Bounds.X, 0, (int)(element.screen.WorkingArea.Height * ratioImage), element.screen.WorkingArea.Height));
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (finalImage != null)
+        //            finalImage.Dispose();
+        //        Logger.WriteLog(Name, ex);
+        //    }
+        //    return finalImage;
+        //}
         #endregion
 
         #region Preview

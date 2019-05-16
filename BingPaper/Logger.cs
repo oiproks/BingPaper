@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BingPaper
 {
@@ -16,6 +13,8 @@ namespace BingPaper
             {
                 sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "\\Log.txt", true);
                 sw.WriteLine(DateTime.Now.ToString() + ": Error in " + context + "\r\n\t" + ex.Source.ToString().Trim() + "; " + ex.Message.ToString().Trim());
+                if (context.Equals("Connection"))
+                    MessageBox.Show(null,"BingPaper requires Internet connection.", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 sw.Flush();
                 sw.Close();
             }

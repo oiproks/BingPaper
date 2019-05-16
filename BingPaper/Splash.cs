@@ -24,7 +24,6 @@ namespace BingPaper
             if (Opacity == 1)
             {
                 t1.Stop();
-                Logger.WriteLog("Searching new wallpapers");
                 MainForm.DownloadJSON();
             }
             else

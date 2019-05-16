@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -88,6 +89,45 @@ namespace BingPaper
             }
 
             NativeMethods.SystemParametersInfo(val, 0, fileName, 0x01 | 0x02);
+        }
+
+        public static Bitmap CreateMultiScreenWall(string name, List<ScreenAndWallpaper> screenList)
+        {
+            Bitmap finalImage = null;
+            try
+            {
+                int width = 0;
+                int height = 0;
+                foreach (ScreenAndWallpaper element in screenList)
+                {
+                    width += element.screen.WorkingArea.Width;
+                    height = element.screen.WorkingArea.Height > height ? element.screen.WorkingArea.Height : height;
+                }
+
+                finalImage = new Bitmap(width, height);
+
+                using (Graphics g = Graphics.FromImage(finalImage))
+                {
+                    g.Clear(Color.Black);
+                    foreach (ScreenAndWallpaper element in screenList)
+                    {
+                        Utilities.PrepareFileName(true, element.image.bitmap, element.image.name, element.image.date);
+                        float ratioImage = (float)element.image.bitmap.Width / (float)element.image.bitmap.Height;
+                        float ratioScreen = (float)element.screen.WorkingArea.Width / (float)element.screen.WorkingArea.Height;
+                        if (ratioScreen > ratioImage)
+                            g.DrawImage(element.image.bitmap, new Rectangle(element.screen.Bounds.X, 0, element.image.bitmap.Width, height));
+                        else
+                            g.DrawImage(element.image.bitmap, new Rectangle(element.screen.Bounds.X, 0, (int)(element.screen.WorkingArea.Height * ratioImage), element.screen.WorkingArea.Height));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (finalImage != null)
+                    finalImage.Dispose();
+                Logger.WriteLog(name, ex);
+            }
+            return finalImage;
         }
     }
 }

@@ -120,6 +120,12 @@
     <Compile Include="Info.Designer.cs">
       <DependentUpon>Info.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoadPast.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadPast.Designer.cs">
+      <DependentUpon>LoadPast.cs</DependentUpon>
+    </Compile>
     <Compile Include="Logger.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -163,6 +169,9 @@
     <Compile Include="Utilities.cs" />
     <EmbeddedResource Include="Info.resx">
       <DependentUpon>Info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadPast.resx">
+      <DependentUpon>LoadPast.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
