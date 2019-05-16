@@ -9,13 +9,13 @@ namespace BingPaper
 {
     class Logger
     {
-        public static void WriteLog(Exception ex)
+        public static void WriteLog(string context, Exception ex)
         {
             StreamWriter sw = null;
             try
             {
                 sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "\\Log.txt", true);
-                sw.WriteLine(DateTime.Now.ToString() + ": " + ex.Source.ToString().Trim() + "; " + ex.Message.ToString().Trim());
+                sw.WriteLine(DateTime.Now.ToString() + ": Error in " + context + "\r\n\t" + ex.Source.ToString().Trim() + "; " + ex.Message.ToString().Trim());
                 sw.Flush();
                 sw.Close();
             }

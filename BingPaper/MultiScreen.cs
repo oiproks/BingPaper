@@ -133,11 +133,6 @@ namespace BingPaper
             {
                 int width = 0;
                 int height = 0;
-                //foreach (Bitmap wall in wallList)
-                //{
-                //    width += wall.Width;
-                //    height = wall.Height > height ? wall.Height : height;
-                //}
                 foreach (ScreenAndWallpaper element in screenList)
                 {
                     width += element.screen.WorkingArea.Width;
@@ -160,14 +155,14 @@ namespace BingPaper
                             g.DrawImage(element.image.bitmap, new Rectangle(element.screen.Bounds.X, 0, (int)(element.screen.WorkingArea.Height * ratioImage), element.screen.WorkingArea.Height));
                     }
                 }
-                return finalImage;
             }
             catch (Exception ex)
             {
                 if (finalImage != null)
                     finalImage.Dispose();
-                throw ex;
+                Logger.WriteLog(Name, ex);
             }
+            return finalImage;
         }
         #endregion
 

@@ -152,7 +152,7 @@ namespace BingPaper
                 }
                 catch (Exception ex)
                 {
-                    Logger.WriteLog(ex);
+                    Logger.WriteLog("MainForm", ex);
                 }
                 files = files.OrderByDescending(o => o.date).ToList();
                 Logger.WriteLog("Downloaded " + files.Count.ToString() + " wallpapers.");

@@ -30,13 +30,13 @@ namespace BingPaper
             }
             catch (Exception ex)
             {
-                Logger.WriteLog(ex);
+                Logger.WriteLog("Utilities", ex);
             }
         }
 
         public static string PrepareFileName(bool single, Bitmap bitmap, string imageName = "multi", string date = "")
         {
-            string fileName = Path.Combine(Environment.CurrentDirectory, "Images") + "\\";
+            string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images") + "\\";
             if (single)
             {
                 string nameCode = string.Empty;
@@ -45,7 +45,7 @@ namespace BingPaper
                     nameCode += imageName[x];
                     x += 4;
                 }
-                string[] files = Directory.GetFiles(Path.Combine(Environment.CurrentDirectory, "Images")).ToArray();
+                string[] files = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images")).ToArray();
                 foreach (string file in files)
                     if (file.Contains(nameCode))
                         File.Delete(file);
