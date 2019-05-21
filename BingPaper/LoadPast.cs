@@ -22,6 +22,7 @@ namespace BingPaper
 
             files = new List<Files>();
             string[] imageFiles = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images")).ToArray();
+
             foreach (string file in imageFiles)
                 if (!file.Contains("multi"))
                 {
