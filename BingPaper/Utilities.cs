@@ -111,7 +111,7 @@ namespace BingPaper
                     g.Clear(Color.Black);
                     foreach (ScreenAndWallpaper element in screenList)
                     {
-                        Utilities.PrepareFileName(true, element.image.bitmap, element.image.name, element.image.date);
+                        PrepareFileName(true, element.image.bitmap, element.image.name, element.image.date);
                         float ratioImage = (float)element.image.bitmap.Width / (float)element.image.bitmap.Height;
                         float ratioScreen = (float)element.screen.WorkingArea.Width / (float)element.screen.WorkingArea.Height;
                         if (ratioScreen > ratioImage)
