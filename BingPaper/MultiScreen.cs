@@ -75,9 +75,9 @@ namespace BingPaper
         private void btnApply_Click(object sender, EventArgs e)
         {
             Bitmap bitmap;
-            if (screenList.Count(x => x.image != null) == screenList.Count)
+            if (screenList.Count(x => x.image.bitmap != null) == screenList.Count)
             {
-                bitmap = Utilities.CreateMultiScreenWall(Name, screenList);
+                bitmap = Utilities.CreateMultiScreenWall(true, Name, screenList);
                 string fileName = Utilities.PrepareFileName(false, bitmap);
                 Utilities.SetWallpaper(20, fileName, Utilities.Style.Tiled);
             }

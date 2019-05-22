@@ -39,7 +39,7 @@
             this.btnOption = new System.Windows.Forms.Button();
             this.rightArrow1 = new BingPaper.ArrowRight();
             this.leftArrow1 = new BingPaper.ArrowLeft();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPast = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pctBoxWall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bingPaper2)).BeginInit();
             this.SuspendLayout();
@@ -187,18 +187,22 @@
             this.leftArrow1.UseVisualStyleBackColor = false;
             this.leftArrow1.Click += new System.EventHandler(this.btnLeft_Click);
             // 
-            // button1
+            // btnPast
             // 
-            this.button1.BackColor = System.Drawing.Color.Yellow;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-            this.button1.FlatAppearance.BorderSize = 2;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(913, 118);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(35, 35);
-            this.button1.TabIndex = 20;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.btnLoadPast);
+            this.btnPast.BackColor = System.Drawing.Color.Transparent;
+            this.btnPast.BackgroundImage = global::BingPaper.Properties.Resources.past;
+            this.btnPast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPast.FlatAppearance.BorderSize = 0;
+            this.btnPast.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnPast.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnPast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPast.Location = new System.Drawing.Point(0, 26);
+            this.btnPast.Name = "btnPast";
+            this.btnPast.Size = new System.Drawing.Size(72, 39);
+            this.btnPast.TabIndex = 20;
+            this.btnPast.UseVisualStyleBackColor = false;
+            this.btnPast.Visible = false;
+            this.btnPast.Click += new System.EventHandler(this.btnLoadPast);
             // 
             // MainForm
             // 
@@ -206,7 +210,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(960, 560);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnPast);
             this.Controls.Add(this.btnOption);
             this.Controls.Add(this.btnSetMulti);
             this.Controls.Add(this.bingPaper2);
@@ -247,7 +251,7 @@
         private System.Windows.Forms.PictureBox bingPaper2;
         private System.Windows.Forms.Button btnSetMulti;
         private System.Windows.Forms.Button btnOption;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPast;
     }
 }
 

@@ -28,7 +28,7 @@ namespace BingPaper
                 {
                     string date = file.Substring(file.IndexOf("\\Images\\") + 8, 8);
                     DateTime oDate = DateTime.ParseExact(date, "yy_MM_dd", null);
-                    files.Add(new Files("", "", oDate.ToString("yyyy MM dd"), new Bitmap(file)));
+                    files.Add(new Files(file, "", oDate.ToString("yyyy MM dd"), new Bitmap(file)));
                 }
 
             screenList = new List<ScreenAndWallpaper>();
@@ -52,7 +52,9 @@ namespace BingPaper
 
                 PictureBox pictureBox = new PictureBox
                 {
-                    Image = file.bitmap
+                    Image = file.bitmap,
+                    Tag = file.url,
+                    Name = file.date
                 };
                 pictureBox.MouseHover += ShowPreview;
                 pictureBox.MouseLeave += HidePreview;
@@ -90,40 +92,40 @@ namespace BingPaper
                 switch (Screen.AllScreens.Count())
                 {
                     case 1:
-                        label.MaximumSize = new Size(110, 0);
-                        flpRadio.Size = new Size(245, 24);
-                        panel.Size = new Size(265, 73);
-                        flpMain.Size = new Size(266, 350);
-                        btnApply.Location = new Point(38, 370);
-                        btnCancel.Location = new Point(131, 370);
-                        Size = new Size(278, 405);
+                        label.MaximumSize = new Size(144, 0);
+                        flpRadio.Size = new Size(144, 24);
+                        panel.Size = new Size(268, 73);
+                        flpMain.Size = new Size(294, 350);
+                        btnApply.Location = new Point(120, 370);
+                        btnCancel.Location = new Point(213, 370);
+                        Size = new Size(300, 405);
                         break;
                     case 2:
-                        label.MaximumSize = new Size(190, 0);
-                        flpRadio.Size = new Size(215, 24);
-                        panel.Size = new Size(335, 73);
-                        flpMain.Size = new Size(336, 350);
-                        btnApply.Location = new Point(128, 370);
-                        btnCancel.Location = new Point(221, 370);
-                        Size = new Size(348, 405);
+                        label.MaximumSize = new Size(224, 0);
+                        flpRadio.Size = new Size(224, 24);
+                        panel.Size = new Size(348, 73);
+                        flpMain.Size = new Size(374, 350);
+                        btnApply.Location = new Point(200, 370);
+                        btnCancel.Location = new Point(293, 370);
+                        Size = new Size(380, 405);
                         break;
                     case 3:
-                        label.MaximumSize = new Size(270, 0);
-                        flpRadio.Size = new Size(285, 24);
-                        panel.Size = new Size(405, 73);
-                        flpMain.Size = new Size(406, 350);
-                        btnApply.Location = new Point(218, 370);
-                        btnCancel.Location = new Point(311, 370);
-                        Size = new Size(418, 405);
+                        label.MaximumSize = new Size(304, 0);
+                        flpRadio.Size = new Size(304, 24);
+                        panel.Size = new Size(428, 73);
+                        flpMain.Size = new Size(454, 350);
+                        btnApply.Location = new Point(280, 370);
+                        btnCancel.Location = new Point(373, 370);
+                        Size = new Size(460, 405);
                         break;
                     case 4:
-                        label.MaximumSize = new Size(350, 0);
-                        flpRadio.Size = new Size(355, 24);
-                        panel.Size = new Size(475, 73);
-                        flpMain.Size = new Size(476, 350);
-                        btnApply.Location = new Point(308, 370);
-                        btnCancel.Location = new Point(401, 370);
-                        Size = new Size(488, 405);
+                        label.MaximumSize = new Size(384, 0);
+                        flpRadio.Size = new Size(384, 24);
+                        panel.Size = new Size(508, 73);
+                        flpMain.Size = new Size(534, 350);
+                        btnApply.Location = new Point(360, 370);
+                        btnCancel.Location = new Point(453, 370);
+                        Size = new Size(540, 405);
                         break;
 
                 }
@@ -144,21 +146,34 @@ namespace BingPaper
             RadioButton radio = (RadioButton)sender;
             if (radio.Checked)
             {
-                int.TryParse(radio.Text[radio.Text.Length - 1].ToString(), out int screenIndex);
+                int.TryParse(radio.Name[radio.Name.Length - 1].ToString(), out int screenIndex);
                 FlowLayoutPanel flp = radio.Parent as FlowLayoutPanel;
                 Panel panel = flp.Parent as Panel;
+                string panelName = panel.Name;
                 foreach (Control control in panel.Controls)
                 {
                     if (control is PictureBox pictureBox)
+                    {
                         screenList[screenIndex - 1].image.bitmap = (Bitmap)pictureBox.Image;
-                    if (control is FlowLayoutPanel flpRadio)
-                        foreach(RadioButton screenRadio in flpRadio.Controls)
-                        {
-                            int.TryParse(screenRadio.Text[screenRadio.Text.Length - 1].ToString(), out int radioNum);
-                            radioNum %= screenList.Count;
-                            if (radioNum == screenIndex)
-                                screenRadio.Checked = false;
-                        }
+                        screenList[screenIndex - 1].image.url = pictureBox.Tag.ToString();
+                        screenList[screenIndex - 1].image.date = pictureBox.Name.ToString();
+                        btnApply.Enabled = true;
+                    }
+                }
+                // Uncheck the Radio with same screen in other Panels
+                FlowLayoutPanel bigFLP = panel.Parent as FlowLayoutPanel;
+                foreach (Panel control in bigFLP.Controls)
+                {
+                    if (panelName.Equals(control.Name))
+                        continue;
+                    foreach (Control panelControls in control.Controls)
+                        if (panelControls is FlowLayoutPanel smallFLP)
+                            foreach (RadioButton screenRadio in smallFLP.Controls)
+                            {
+                                int.TryParse(screenRadio.Name[screenRadio.Name.Length - 1].ToString(), out int radioNum);
+                                if (radioNum == screenIndex)
+                                    screenRadio.Checked = false;
+                            }
                 }
             }
         }
@@ -167,22 +182,29 @@ namespace BingPaper
         private void btnApply_Click(object sender, EventArgs e)
         {
             Bitmap bitmap;
-            if (screenList.Count(x => x.image != null) == screenList.Count)
+            string log;
+            int wallpapers = screenList.Count(x => x.image.bitmap != null);
+            if (wallpapers == screenList.Count)
             {
-                bitmap = Utilities.CreateMultiScreenWall(Name, screenList);
+                bitmap = Utilities.CreateMultiScreenWall(false, Name, screenList);
                 string fileName = Utilities.PrepareFileName(false, bitmap);
                 Utilities.SetWallpaper(20, fileName, Utilities.Style.Tiled);
-            }
-
-            string log = @"Applying " + screenList.Count + " wallpapers:\r\n\t";
-            foreach (ScreenAndWallpaper saw in screenList)
+                log = @"Applying " + wallpapers + " wallpapers:\r\n\t";
+                foreach (ScreenAndWallpaper saw in screenList)
+                {
+                    if (saw.image.bitmap != null)
+                        log += @"Number " + (screenList.FindIndex(x => x == saw) + 1).ToString() + "\r\n\t"
+                            + "- Image from date: " + saw.image.date + ".\r\n\t";
+                }
+            } else
             {
-                log += @"Number " + (screenList.FindIndex(x => x == saw) + 1).ToString() + "\r\n\t"
-                    + "- Screen resolution: " + saw.screen.Bounds.Size.Width.ToString() + "x" + saw.screen.Bounds.Size.Height.ToString() + "\r\n\t"
-                    + "- Image resolution: " + saw.image.bitmap.Size.Width.ToString() + "x" + saw.image.bitmap.Size.Height.ToString() + "\r\n\t"
-                    + "- Image description: " + saw.image.name + "\r\n\t"
-                    + "- Image date: " + DateTime.ParseExact(saw.image.date, "yyyyMMdd", null).ToString("yyyy-MM-dd") + "\r\n\t";
+                int index = screenList.FindIndex(x => x.image != null);
+                string fileName = screenList[index].image.url;
+                Utilities.SetWallpaper(0x0014, fileName, Utilities.Style.Fill);
+                log = @"Applying wallpaper:"
+                    + "\r\n\t- Image from date: " + screenList[index].image.date + ".";
             }
+            
             Logger.WriteLog(log);
 
             btnClose_Click(sender, e);
@@ -205,7 +227,8 @@ namespace BingPaper
 
         private void HidePreview(object sender, EventArgs e)
         {
-
+            if (preview != null)
+                preview.Close();
         }
         #endregion
     }

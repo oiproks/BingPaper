@@ -98,6 +98,11 @@ namespace BingPaper
             elementOnPicture(btnSetWall);
             elementOnPicture(btnSetMulti);
             elementOnPicture(bingPaper2);
+            if (Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images")).Count() >= 2)
+            {
+                btnPast.Visible = true;
+                elementOnPicture(btnPast);
+            }
 
             if (Screen.AllScreens.Count() > 1)
             {

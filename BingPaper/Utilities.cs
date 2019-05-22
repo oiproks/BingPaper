@@ -91,7 +91,7 @@ namespace BingPaper
             NativeMethods.SystemParametersInfo(val, 0, fileName, 0x01 | 0x02);
         }
 
-        public static Bitmap CreateMultiScreenWall(string name, List<ScreenAndWallpaper> screenList)
+        public static Bitmap CreateMultiScreenWall(bool save, string name, List<ScreenAndWallpaper> screenList)
         {
             Bitmap finalImage = null;
             try
@@ -111,7 +111,8 @@ namespace BingPaper
                     g.Clear(Color.Black);
                     foreach (ScreenAndWallpaper element in screenList)
                     {
-                        Utilities.PrepareFileName(true, element.image.bitmap, element.image.name, element.image.date);
+                        if (save)
+                            PrepareFileName(true, element.image.bitmap, element.image.name, element.image.date);
                         float ratioImage = (float)element.image.bitmap.Width / (float)element.image.bitmap.Height;
                         float ratioScreen = (float)element.screen.WorkingArea.Width / (float)element.screen.WorkingArea.Height;
                         if (ratioScreen > ratioImage)
