@@ -10,6 +10,7 @@ See the latest Bing daily photos and use them as your wallpaper.
 - Automatically saves the used wallpapers locally
 - Browse previously used images and set them as wallpapers
 - Shows the Bing image informations
+- All the thumbnails provide an enlarged preview
 
 
 ## Download BingPaper
