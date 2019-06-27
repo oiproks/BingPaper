@@ -18,6 +18,7 @@ namespace BingPaper
     public partial class MainForm : Form
     {
         private const string bing = "http://www.bing.com";
+        //https://bingdesktop.com/ Alternative with images from all the regions
         private string fileName = string.Empty;
         private int file_index = 0;
         private static List<Files> files;
@@ -144,7 +145,7 @@ namespace BingPaper
                     JObject objects = JObject.Parse(json);
                     ListBuilder(ref files, objects);
 
-                    url = Properties.Resources.bing_json_url_2;
+                    url = Resources.bing_json_url_2;
                     json = new WebClient().DownloadString(url);
                     objects = JObject.Parse(json);
                     ListBuilder(ref files, objects);

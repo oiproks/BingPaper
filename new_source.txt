@@ -1,0 +1,16 @@
+<li class="image-list-item image-list-photo-item gallery-photo lazyloaded" data-bgset="https://img.bingdesktop.com/fd34af737a6c4112b26c4cc9878d509c_480.jpg" style="position: absolute; width: 354.667px; height: 199.251px; top: 10px; left: 10px; background-image: url(&quot;https://img.bingdesktop.com/fd34af737a6c4112b26c4cc9878d509c_480.jpg&quot;);">
+	<a class="image-list-item__overlay" href="/gallery/27691">
+		<span class="sr-only">
+			Green sea turtle with sardines near Playa Grandi Beach, Curaçao
+		</span>
+	</a>
+	<div class="image-list-info-bar">
+		<a class="image-list-info-bar__credit" href="/gallery/27691">
+			Green sea turtle with sardines near Playa Grandi Beach, Curaçao
+		</a>
+	</div>
+	<picture style="display: none;">
+		<source data-srcset="https://img.bingdesktop.com/fd34af737a6c4112b26c4cc9878d509c_480.jpg" sizes="355px" srcset="https://img.bingdesktop.com/fd34af737a6c4112b26c4cc9878d509c_480.jpg"><img alt="" class="lazyautosizes lazyloaded" data-sizes="auto" data-parent-fit="cover" sizes="355px">
+	</picture>
+</li>
+            
