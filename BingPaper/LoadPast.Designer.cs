@@ -38,7 +38,7 @@
             this.flpMain.AutoScroll = true;
             this.flpMain.Location = new System.Drawing.Point(6, 6);
             this.flpMain.Name = "flpMain";
-            this.flpMain.Size = new System.Drawing.Size(476, 350);
+            this.flpMain.Size = new System.Drawing.Size(476, 560);
             this.flpMain.TabIndex = 46;
             // 
             // btnCancel
@@ -50,7 +50,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.btnCancel.ForeColor = System.Drawing.Color.DimGray;
-            this.btnCancel.Location = new System.Drawing.Point(401, 370);
+            this.btnCancel.Location = new System.Drawing.Point(401, 572);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 48;
@@ -70,7 +70,7 @@
             this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.btnApply.ForeColor = System.Drawing.Color.DimGray;
-            this.btnApply.Location = new System.Drawing.Point(308, 370);
+            this.btnApply.Location = new System.Drawing.Point(308, 572);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
             this.btnApply.TabIndex = 47;
@@ -85,7 +85,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(488, 405);
+            this.ClientSize = new System.Drawing.Size(488, 600);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.flpMain);
